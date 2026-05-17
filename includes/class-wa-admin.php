@@ -110,7 +110,7 @@ class WA_Admin
             return;
         }
 
-        $current = $_GET['wa_estado'] ?? '';
+        $current = sanitize_text_field(wp_unslash($_GET['wa_estado'] ?? ''));
         ?>
         <select name="wa_estado">
             <option value=""><?php esc_html_e('Todos los estados', 'woosales-arrepentimiento'); ?></option>
@@ -136,7 +136,7 @@ class WA_Admin
             return;
         }
 
-        $estado = $_GET['wa_estado'] ?? '';
+        $estado = sanitize_text_field(wp_unslash($_GET['wa_estado'] ?? ''));
         if (!empty($estado) && in_array($estado, WA_Status::estados(), true)) {
             $query->set('meta_key', '_wa_estado');
             $query->set('meta_value', $estado);
@@ -246,5 +246,8 @@ class WA_Admin
             WA_VERSION,
             true
         );
+        wp_localize_script('wa-admin-js', 'WA_Admin', [
+            'confirm_status' => __('¿Confirmás cambiar el estado?', 'woosales-arrepentimiento'),
+        ]);
     }
 }

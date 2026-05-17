@@ -21,13 +21,15 @@ class WA_Tracking
 
     public function enqueue_assets(): void
     {
+        // wa-form-css is registered by WA_Form_Handler; enqueue only when shortcode present
         if (is_singular() && has_shortcode(get_post()->post_content ?? '', 'wa_seguimiento')) {
-            wp_enqueue_style('wa-form-css', WA_PLUGIN_URL . 'assets/css/wa-form.css', [], WA_VERSION);
+            wp_enqueue_style('wa-form-css');
         }
     }
 
     public function render_tracking(): string
     {
+        wp_enqueue_style('wa-form-css');
         $codigo = sanitize_text_field($_GET['codigo'] ?? '');
         $resultado = null;
         $error = '';

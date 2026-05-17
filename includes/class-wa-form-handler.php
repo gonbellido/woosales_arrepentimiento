@@ -32,29 +32,44 @@ class WA_Form_Handler
      */
     public function enqueue_assets(): void
     {
-        $has_shortcode = false;
+        // Always register so shortcode callbacks can enqueue on demand (page builders, widgets, etc.)
+        wp_register_style('wa-form-css', WA_PLUGIN_URL . 'assets/css/wa-form.css', [], WA_VERSION);
+        wp_register_script('wa-form-js', WA_PLUGIN_URL . 'assets/js/wa-form.js', ['jquery'], WA_VERSION, true);
 
+        // Early enqueue for standard singular pages (avoids FOUC / late-enqueue edge cases)
         if (is_singular()) {
             $content = get_post()->post_content ?? '';
-            $has_shortcode = has_shortcode($content, 'wa_formulario_arrepentimiento')
-                || has_shortcode($content, 'wa_boton_arrepentimiento');
+            if (
+                has_shortcode($content, 'wa_formulario_arrepentimiento') ||
+                has_shortcode($content, 'wa_boton_arrepentimiento')
+            ) {
+                $this->do_enqueue_assets();
+            }
         }
+    }
 
-        if ($has_shortcode) {
-            wp_enqueue_style('wa-form-css', WA_PLUGIN_URL . 'assets/css/wa-form.css', [], WA_VERSION);
-            wp_enqueue_script('wa-form-js', WA_PLUGIN_URL . 'assets/js/wa-form.js', ['jquery'], WA_VERSION, true);
-            wp_localize_script('wa-form-js', 'WA_Form', [
-                'ajax_url' => admin_url('admin-ajax.php'),
-                'nonce'    => wp_create_nonce('wa_form_nonce'),
-                'text'     => [
-                    'success_title'   => __('¡Solicitud Enviada!', 'woosales-arrepentimiento'),
-                    'error_generic'   => __('Ocurrió un error. Intentalo de nuevo.', 'woosales-arrepentimiento'),
-                    'error_order'     => __('El número de pedido no es válido.', 'woosales-arrepentimiento'),
-                    'error_duplicate' => __('Ya existe una reclamación activa para este pedido.', 'woosales-arrepentimiento'),
-                    'sending'         => __('Enviando...', 'woosales-arrepentimiento'),
-                ],
-            ]);
+    /**
+     * Encolar y localizar assets. Seguro llamarlo múltiples veces (idempotente).
+     */
+    private function do_enqueue_assets(): void
+    {
+        if (wp_script_is('wa-form-js', 'enqueued')) {
+            return;
         }
+        wp_enqueue_style('wa-form-css');
+        wp_enqueue_script('wa-form-js');
+        wp_localize_script('wa-form-js', 'WA_Form', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce'    => wp_create_nonce('wa_form_nonce'),
+            'text'     => [
+                'success_title'   => __('¡Solicitud Enviada!', 'woosales-arrepentimiento'),
+                'error_generic'   => __('Ocurrió un error. Intentalo de nuevo.', 'woosales-arrepentimiento'),
+                'error_order'     => __('El número de pedido no es válido.', 'woosales-arrepentimiento'),
+                'error_duplicate' => __('Ya existe una reclamación activa para este pedido.', 'woosales-arrepentimiento'),
+                'sending'         => __('Enviando...', 'woosales-arrepentimiento'),
+                'submit_btn'      => __('Enviar Solicitud de Arrepentimiento', 'woosales-arrepentimiento'),
+            ],
+        ]);
     }
 
     /**
@@ -62,6 +77,7 @@ class WA_Form_Handler
      */
     public function render_form(): string
     {
+        $this->do_enqueue_assets();
         ob_start();
         include WA_PLUGIN_DIR . 'templates/form-reclamacion.php';
         return ob_get_clean();
@@ -76,6 +92,7 @@ class WA_Form_Handler
      */
     public function render_boton(array $atts = []): string
     {
+        $this->do_enqueue_assets();
         $es_primera_vez = !self::$boton_usado;
         self::$boton_usado = true;
 
@@ -139,8 +156,9 @@ class WA_Form_Handler
         }
 
         // Si después de 5 intentos colisiona (extremadamente improbable), usar microtime
-        $rand   = str_pad((string) wp_rand(0, 999), 3, '0', STR_PAD_LEFT);
-        return $rand . '-' . $pedido_id . '-' . $fecha . '-' . substr((string) microtime(true), -4);
+        $rand = str_pad((string) wp_rand(0, 999), 3, '0', STR_PAD_LEFT);
+        $extra = str_pad((string) wp_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        return $rand . '-' . $pedido_id . '-' . $fecha . '-' . $extra;
     }
 
     /**
@@ -153,7 +171,7 @@ class WA_Form_Handler
         $order = wc_get_order($pedido_id);
 
         if (!$order) {
-            return $advertencias; // Sin pedido no podemos validar
+            return $advertencias;
         }
 
         $fecha_compra = $order->get_date_created();
@@ -161,11 +179,10 @@ class WA_Form_Handler
             return $advertencias;
         }
 
-        $fecha_compra_obj = $fecha_compra->date('Y-m-d');
-        $hoy = current_time('Y-m-d');
-        $dias_transcurridos = (int) (strtotime($hoy) - strtotime($fecha_compra_obj)) / DAY_IN_SECONDS;
+        $hoy = new \DateTime(current_time('Y-m-d'));
+        $compra = new \DateTime($fecha_compra->date('Y-m-d'));
+        $dias_transcurridos = (int) $hoy->diff($compra)->days;
 
-        // Regla de 10 días corridos desde compra
         if ($dias_transcurridos > 10) {
             $advertencias[] = sprintf(
                 __('Han transcurrido %d días desde la compra. El plazo legal de 10 días corridos (Ley 24.240) podría haber vencido.', 'woosales-arrepentimiento'),
@@ -173,12 +190,12 @@ class WA_Form_Handler
             );
         }
 
-        // Validación extra si hay fecha de reserva
         if (!empty($fecha_reserva)) {
-            $fecha_reserva_obj = date('Y-m-d', strtotime($fecha_reserva));
-            $dias_para_reserva = (int) (strtotime($fecha_reserva_obj) - strtotime($hoy)) / DAY_IN_SECONDS;
+            $reserva = new \DateTime(sanitize_text_field($fecha_reserva));
+            $dias_para_reserva = (int) $hoy->diff($reserva)->days;
+            $reserva_pasada = $reserva < $hoy;
 
-            if ($dias_para_reserva < 0) {
+            if ($reserva_pasada) {
                 $advertencias[] = __('La fecha de la reserva ya transcurrió. El derecho de arrepentimiento podría no ser aplicable.', 'woosales-arrepentimiento');
             } elseif ($dias_para_reserva < 2) {
                 $advertencias[] = __('Faltan menos de 48 horas hábiles para el inicio del servicio. El derecho de arrepentimiento podría no ser aplicable.', 'woosales-arrepentimiento');

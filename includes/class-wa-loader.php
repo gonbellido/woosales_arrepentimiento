@@ -42,6 +42,12 @@ class WA_Loader
         self::$instances['admin']        = new WA_Admin();
         self::$instances['settings']     = new WA_Settings();
         self::$instances['review']       = new WA_Review();
+
+        // Elementor widgets (carga solo si Elementor está activo)
+        if (did_action('elementor/loaded')) {
+            require_once WA_PLUGIN_DIR . 'includes/class-wa-elementor.php';
+            self::$instances['elementor'] = new WA_Elementor();
+        }
     }
 
     public static function get(string $key): ?object

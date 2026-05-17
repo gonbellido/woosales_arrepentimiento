@@ -193,19 +193,6 @@ class WA_Post_Type
         </ul>
         <?php endif; ?>
 
-        <script>
-        jQuery(function($){
-            $('#wa_nuevo_estado').on('change', function(){
-                if ($(this).val() === 'rechazada') {
-                    $('#wa_motivo_rechazo_wrap').show();
-                    $('#wa_motivo_rechazo').prop('required', true);
-                } else {
-                    $('#wa_motivo_rechazo_wrap').hide();
-                    $('#wa_motivo_rechazo').prop('required', false);
-                }
-            }).trigger('change');
-        });
-        </script>
         <?php
     }
 

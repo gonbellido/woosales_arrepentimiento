@@ -18,7 +18,7 @@
         }
 
         $submitBtn.prop('disabled', true).text(WA_Form.text.sending);
-        $messages.hide().removeClass('wa-alert-success wa-alert-error wa-alert-warning').empty();
+        $messages.hide().removeClass('wa-alert wa-alert-success wa-alert-error wa-alert-warning').empty();
 
         var data = {
             action:         'wa_enviar_reclamacion',
@@ -31,7 +31,7 @@
         };
 
         $.post(WA_Form.ajax_url, data, function (response) {
-            $submitBtn.prop('disabled', false).text('Enviar Solicitud de Arrepentimiento');
+            $submitBtn.prop('disabled', false).text(WA_Form.text.submit_btn);
 
             if (response.success) {
                 var html = '<p><strong>' + WA_Form.text.success_title + '</strong></p>';
@@ -52,7 +52,7 @@
                     html += '</ul>';
                 }
 
-                $messages.addClass('wa-alert-success').html(html).show();
+                $messages.addClass('wa-alert wa-alert-success').html(html).show();
                 $form.find('.wa-legal-notice, .wa-form-field, .wa-form-actions, .wa-form-row').slideUp();
             } else {
                 var html = '';
@@ -65,14 +65,14 @@
                 } else {
                     html = '<p>' + WA_Form.text.error_generic + '</p>';
                 }
-                $messages.addClass('wa-alert-error').html(html).show();
+                $messages.addClass('wa-alert wa-alert-error').html(html).show();
             }
 
             // Scroll to messages
             $('html, body').animate({ scrollTop: $messages.offset().top - 100 }, 300);
         }).fail(function () {
-            $submitBtn.prop('disabled', false).text('Enviar Solicitud de Arrepentimiento');
-            $messages.addClass('wa-alert-error')
+            $submitBtn.prop('disabled', false).text(WA_Form.text.submit_btn);
+            $messages.addClass('wa-alert wa-alert-error')
                 .html('<p>' + WA_Form.text.error_generic + '</p>')
                 .show();
         });
@@ -82,12 +82,14 @@
     window.WA_Modal = {
         open: function () {
             var $modal = $('#wa-modal');
-            $modal.fadeIn(200).css('display', 'flex');
+            $modal.css({ display: 'flex', opacity: 0 }).animate({ opacity: 1 }, 200);
             $('body').css('overflow', 'hidden');
         },
         close: function () {
             var $modal = $('#wa-modal');
-            $modal.fadeOut(150);
+            $modal.animate({ opacity: 0 }, 150, function () {
+                $modal.css('display', 'none');
+            });
             $('body').css('overflow', '');
         }
     };
