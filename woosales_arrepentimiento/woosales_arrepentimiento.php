@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:     WooSales Arrepentimiento
- * Plugin URI:      https://github.com/tu-usuario/woosales_arrepentimiento
+ * Plugin URI:      https://github.com/gonbellido/woosales_arrepentimiento
  * Description:     Gestión de Reclamaciones de Arrepentimiento para WooCommerce según Ley 24.240 (Argentina). Formulario público, código de trámite, seguimiento y backoffice simple.
  * Version:         1.0.0
  * Author:          WooSales
