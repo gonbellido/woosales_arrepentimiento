@@ -14,6 +14,7 @@
  * Requires PHP:      7.4
  * WC requires at least: 5.0
  * WC tested up to:   9.4
+ * Requires Plugins:  woocommerce
  */
 
 if (!defined('ABSPATH')) {
@@ -24,6 +25,16 @@ define('WA_VERSION', '1.0.0');
 define('WA_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WA_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WA_PLUGIN_BASENAME', plugin_basename(__FILE__));
+
+/**
+ * Declarar compatibilidad con HPOS (High-Performance Order Storage)
+ * y otras features modernas de WooCommerce.
+ */
+add_action('before_woocommerce_init', function () {
+    if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+    }
+});
 
 /**
  * Verifica que WooCommerce esté activo.
