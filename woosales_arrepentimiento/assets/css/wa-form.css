@@ -1,0 +1,390 @@
+/* wa-form.css — Estilos del formulario público y seguimiento */
+
+.wa-form-wrapper,
+.wa-tracking-wrapper {
+    max-width: 700px;
+    margin: 2rem auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.wa-form-title,
+.wa-tracking-title {
+    font-size: 1.6rem;
+    color: #222;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #0073aa;
+    padding-bottom: 0.5rem;
+}
+
+/* Legal notice */
+.wa-legal-notice {
+    background: #fef9e7;
+    border: 1px solid #f9e79f;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #7d6608;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.wa-legal-notice p {
+    margin: 0 0 8px;
+}
+
+.wa-highlight {
+    background: #fff;
+    border-left: 4px solid #0073aa;
+    margin: 12px 0 0;
+    padding: 10px 14px;
+    font-style: italic;
+    color: #333;
+}
+
+/* Form */
+.wa-form {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.wa-form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.wa-form-row .wa-form-field {
+    flex: 1;
+}
+
+.wa-form-field {
+    margin-bottom: 18px;
+}
+
+.wa-form-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333;
+    font-size: 14px;
+}
+
+.wa-form-field input[type="text"],
+.wa-form-field input[type="email"],
+.wa-form-field input[type="date"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.wa-form-field input:focus {
+    border-color: #0073aa;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,115,170,0.2);
+}
+
+.wa-form-field input:invalid:not(:placeholder-shown) {
+    border-color: #d9534f;
+}
+
+.wa-field-hint {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.wa-checkbox-field label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.wa-checkbox-field input[type="checkbox"] {
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.wa-form-actions {
+    margin-top: 8px;
+}
+
+/* Buttons */
+.wa-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.wa-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.wa-btn-primary {
+    background: #0073aa;
+    color: #fff;
+}
+
+.wa-btn-primary:hover:not(:disabled) {
+    background: #005a87;
+}
+
+/* Messages */
+.wa-messages {
+    margin-top: 20px;
+}
+
+.wa-alert {
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 14px;
+}
+
+.wa-alert-success {
+    background: #e8f5e9;
+    border: 1px solid #4caf50;
+    color: #2e7d32;
+}
+
+.wa-alert-error {
+    background: #ffebee;
+    border: 1px solid #d9534f;
+    color: #c62828;
+}
+
+.wa-alert-warning {
+    background: #fff3e0;
+    border: 1px solid #f0ad4e;
+    color: #e65100;
+}
+
+.wa-alert-success .wa-code-display {
+    display: block;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 10px 0;
+    color: #1b5e20;
+    text-align: center;
+}
+
+/* Badges */
+.wa-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Tracking */
+.wa-tracking-form {
+    margin-bottom: 24px;
+}
+
+.wa-tracking-field {
+    display: flex;
+    gap: 10px;
+}
+
+.wa-tracking-field input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: monospace;
+}
+
+.wa-tracking-field button {
+    flex-shrink: 0;
+}
+
+.wa-result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 16px 0;
+}
+
+.wa-result-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.wa-result-label {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.wa-result-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.wa-result-value.wa-code {
+    font-family: monospace;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.wa-result-status .wa-badge {
+    display: inline-block;
+    width: fit-content;
+}
+
+.wa-rejection-reason {
+    background: #ffebee;
+    border: 1px solid #d9534f;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 16px 0;
+}
+
+.wa-rejection-reason h4 {
+    margin: 0 0 6px;
+    color: #c62828;
+    font-size: 14px;
+}
+
+.wa-rejection-reason p {
+    margin: 0;
+    color: #333;
+    font-size: 14px;
+}
+
+/* Timeline */
+.wa-timeline {
+    margin-top: 20px;
+}
+
+.wa-timeline h4 {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: #555;
+}
+
+.wa-timeline-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 2px solid #e0e0e0;
+}
+
+.wa-timeline-item {
+    position: relative;
+    padding: 6px 0 6px 20px;
+    font-size: 13px;
+    color: #555;
+}
+
+.wa-timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 11px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0073aa;
+}
+
+.wa-timeline-date {
+    font-weight: 600;
+    color: #333;
+    margin-right: 8px;
+}
+
+.wa-timeline-note {
+    display: block;
+    font-style: italic;
+    color: #888;
+    margin-top: 2px;
+}
+
+/* Footer button */
+.wa-footer-btn-wrap {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.wa-footer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #d32f2f;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(211,47,47,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.wa-footer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(211,47,47,0.4);
+    color: #fff;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .wa-form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .wa-form {
+        padding: 16px;
+    }
+
+    .wa-result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wa-legal-notice {
+        max-height: 200px;
+        font-size: 12px;
+    }
+
+    .wa-footer-btn-wrap {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .wa-footer-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}
