@@ -43,8 +43,9 @@ class WA_Loader
         self::$instances['settings']     = new WA_Settings();
         self::$instances['review']       = new WA_Review();
 
-        // Elementor widgets (carga solo si Elementor está activo)
-        if (did_action('elementor/loaded')) {
+        // Elementor widgets — class_exists() fuerza el autoload antes del require,
+        // garantizando que Widget_Base esté disponible para la herencia.
+        if (did_action('elementor/loaded') && class_exists('\Elementor\Widget_Base')) {
             require_once WA_PLUGIN_DIR . 'includes/class-wa-elementor.php';
             self::$instances['elementor'] = new WA_Elementor();
         }

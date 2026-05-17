@@ -24,8 +24,11 @@ class WA_Elementor
         wp_enqueue_style('wa-form-css', WA_PLUGIN_URL . 'assets/css/wa-form.css', [], WA_VERSION);
     }
 
-    public function register_widgets(\Elementor\Widgets_Manager $manager): void
+    public function register_widgets($manager): void
     {
+        if (!$manager || !method_exists($manager, 'register')) {
+            return;
+        }
         $manager->register(new WA_Elementor_Widget_Button());
         $manager->register(new WA_Elementor_Widget_Form());
         $manager->register(new WA_Elementor_Widget_Tracking());
