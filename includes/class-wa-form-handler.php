@@ -13,6 +13,11 @@ if (!defined('ABSPATH')) {
 
 class WA_Form_Handler
 {
+    /**
+     * Flag para saber si el botón se usó en esta request.
+     */
+    private static $boton_usado = false;
+
     public function __construct()
     {
         add_shortcode('wa_formulario_arrepentimiento', [$this, 'render_form']);
@@ -20,7 +25,6 @@ class WA_Form_Handler
         add_action('wp_ajax_wa_enviar_reclamacion', [$this, 'handle_submission']);
         add_action('wp_ajax_nopriv_wa_enviar_reclamacion', [$this, 'handle_submission']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_assets']);
-        add_action('wp_footer', [$this, 'render_modal']);
     }
 
     /**
@@ -64,11 +68,6 @@ class WA_Form_Handler
     }
 
     /**
-     * Flag para saber si el botón se usó en esta request.
-     */
-    private static bool $boton_usado = false;
-
-    /**
      * Renderizar botón que abre el modal vía shortcode [wa_boton_arrepentimiento].
      *
      * Atributos:
@@ -77,6 +76,7 @@ class WA_Form_Handler
      */
     public function render_boton(array $atts = []): string
     {
+        $es_primera_vez = !self::$boton_usado;
         self::$boton_usado = true;
 
         $atts = shortcode_atts([
@@ -84,31 +84,30 @@ class WA_Form_Handler
             'class' => '',
         ], $atts, 'wa_boton_arrepentimiento');
 
-        return sprintf(
+        $boton = sprintf(
             '<button type="button" class="wa-popup-trigger %s" onclick="WA_Modal.open()">%s</button>',
             esc_attr($atts['class']),
             esc_html($atts['texto'])
         );
-    }
 
-    /**
-     * Renderizar el modal con el formulario (wp_footer).
-     */
-    public function render_modal(): void
-    {
-        if (!self::$boton_usado) {
-            return;
-        }
-        ?>
-        <div class="wa-modal-overlay" id="wa-modal" style="display:none;">
-            <div class="wa-modal-box">
-                <button type="button" class="wa-modal-close" onclick="WA_Modal.close()" aria-label="<?php esc_attr_e('Cerrar', 'woosales-arrepentimiento'); ?>">&times;</button>
-                <div class="wa-modal-body">
-                    <?php include WA_PLUGIN_DIR . 'templates/form-reclamacion.php'; ?>
+        // Renderizar modal solo la primera vez
+        $modal = '';
+        if ($es_primera_vez) {
+            ob_start();
+            ?>
+            <div class="wa-modal-overlay" id="wa-modal" style="display:none;">
+                <div class="wa-modal-box">
+                    <button type="button" class="wa-modal-close" onclick="WA_Modal.close()" aria-label="<?php esc_attr_e('Cerrar', 'woosales-arrepentimiento'); ?>">&times;</button>
+                    <div class="wa-modal-body">
+                        <?php include WA_PLUGIN_DIR . 'templates/form-reclamacion.php'; ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <?php
+            <?php
+            $modal = ob_get_clean();
+        }
+
+        return $boton . $modal;
     }
 
     /**
