@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name:     Botón de Arrepentimiento Argentina — WooSales
- * Plugin URI:      https://github.com/gonbellido/woosales_arrepentimiento
- * Description:     Botón de Arrepentimiento Argentina para WooCommerce. Cumplí con la Ley 24.240 de Defensa del Consumidor. Formulario público, código de trámite inmediato, seguimiento y gestión simple de reclamaciones.
+ * Plugin URI:      https://woosales.pro/plugin_arrepentimiento_argentina
+ * Description:     Botón de Arrepentimiento Argentina para WooCommerce. Cumplí con la Ley 24.240. Usá [wa_formulario_arrepentimiento] para mostrar el formulario y [wa_seguimiento] para el tracking. Código de trámite inmediato y gestión simple.
  * Version:         1.0.0
  * Author:          WooSales.pro
  * Author URI:      https://woosales.pro
@@ -94,3 +94,48 @@ function wa_enqueue_footer_css(): void
     }
 }
 add_action('wp_enqueue_scripts', 'wa_enqueue_footer_css');
+
+/**
+ * Agregar enlaces "Documentación" y "FAQ" en el listado de plugins.
+ */
+function wa_plugin_action_links(array $links): array
+{
+    $landing = 'https://woosales.pro/plugin_arrepentimiento_argentina';
+
+    $custom = [
+        'docs' => sprintf(
+            '<a href="%s" target="_blank" rel="noopener" style="font-weight:600;">%s</a>',
+            esc_url($landing),
+            esc_html__('📖 Documentación', 'woosales-arrepentimiento')
+        ),
+        'faq' => sprintf(
+            '<a href="%s#faq" target="_blank" rel="noopener">%s</a>',
+            esc_url($landing),
+            esc_html__('❓ FAQ', 'woosales-arrepentimiento')
+        ),
+    ];
+
+    return array_merge($custom, $links);
+}
+add_filter('plugin_action_links_' . WA_PLUGIN_BASENAME, 'wa_plugin_action_links');
+
+/**
+ * Agregar fila de metadatos debajo del plugin en el listado.
+ */
+function wa_plugin_row_meta(array $links, string $file): array
+{
+    if ($file !== WA_PLUGIN_BASENAME) {
+        return $links;
+    }
+
+    $landing = 'https://woosales.pro/plugin_arrepentimiento_argentina';
+
+    $links[] = sprintf(
+        '<a href="%s" target="_blank" rel="noopener">%s</a>',
+        esc_url($landing),
+        esc_html__('Ver detalles y documentación', 'woosales-arrepentimiento')
+    );
+
+    return $links;
+}
+add_filter('plugin_row_meta', 'wa_plugin_row_meta', 10, 2);

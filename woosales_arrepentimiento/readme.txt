@@ -9,7 +9,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Plugin #1 en Argentina para gestionar Reclamaciones de Arrepentimiento en WooCommerce. Cumplí con la Ley 24.240 de forma simple y automática. Por **WooSales.pro** — Expertos en WooCommerce para el mercado argentino.
+Plugin #1 en Argentina para gestionar Reclamaciones de Arrepentimiento en WooCommerce. Usá [wa_formulario_arrepentimiento] para el formulario y [wa_seguimiento] para el tracking. Cumplí con la Ley 24.240. Por **WooSales.pro**.
 
 == Description ==
 
