@@ -16,9 +16,11 @@ class WA_Form_Handler
     public function __construct()
     {
         add_shortcode('wa_formulario_arrepentimiento', [$this, 'render_form']);
+        add_shortcode('wa_boton_arrepentimiento', [$this, 'render_boton']);
         add_action('wp_ajax_wa_enviar_reclamacion', [$this, 'handle_submission']);
         add_action('wp_ajax_nopriv_wa_enviar_reclamacion', [$this, 'handle_submission']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_assets']);
+        add_action('wp_footer', [$this, 'render_modal']);
     }
 
     /**
@@ -26,7 +28,15 @@ class WA_Form_Handler
      */
     public function enqueue_assets(): void
     {
-        if (is_singular() && has_shortcode(get_post()->post_content ?? '', 'wa_formulario_arrepentimiento')) {
+        $has_shortcode = false;
+
+        if (is_singular()) {
+            $content = get_post()->post_content ?? '';
+            $has_shortcode = has_shortcode($content, 'wa_formulario_arrepentimiento')
+                || has_shortcode($content, 'wa_boton_arrepentimiento');
+        }
+
+        if ($has_shortcode) {
             wp_enqueue_style('wa-form-css', WA_PLUGIN_URL . 'assets/css/wa-form.css', [], WA_VERSION);
             wp_enqueue_script('wa-form-js', WA_PLUGIN_URL . 'assets/js/wa-form.js', ['jquery'], WA_VERSION, true);
             wp_localize_script('wa-form-js', 'WA_Form', [
@@ -44,13 +54,61 @@ class WA_Form_Handler
     }
 
     /**
-     * Renderizar formulario vía shortcode.
+     * Renderizar formulario vía shortcode [wa_formulario_arrepentimiento].
      */
     public function render_form(): string
     {
         ob_start();
         include WA_PLUGIN_DIR . 'templates/form-reclamacion.php';
         return ob_get_clean();
+    }
+
+    /**
+     * Flag para saber si el botón se usó en esta request.
+     */
+    private static bool $boton_usado = false;
+
+    /**
+     * Renderizar botón que abre el modal vía shortcode [wa_boton_arrepentimiento].
+     *
+     * Atributos:
+     *   texto  — Texto del botón (default: "Botón de Arrepentimiento")
+     *   class  — Clases CSS extra
+     */
+    public function render_boton(array $atts = []): string
+    {
+        self::$boton_usado = true;
+
+        $atts = shortcode_atts([
+            'texto' => __('Botón de Arrepentimiento', 'woosales-arrepentimiento'),
+            'class' => '',
+        ], $atts, 'wa_boton_arrepentimiento');
+
+        return sprintf(
+            '<button type="button" class="wa-popup-trigger %s" onclick="WA_Modal.open()">%s</button>',
+            esc_attr($atts['class']),
+            esc_html($atts['texto'])
+        );
+    }
+
+    /**
+     * Renderizar el modal con el formulario (wp_footer).
+     */
+    public function render_modal(): void
+    {
+        if (!self::$boton_usado) {
+            return;
+        }
+        ?>
+        <div class="wa-modal-overlay" id="wa-modal" style="display:none;">
+            <div class="wa-modal-box">
+                <button type="button" class="wa-modal-close" onclick="WA_Modal.close()" aria-label="<?php esc_attr_e('Cerrar', 'woosales-arrepentimiento'); ?>">&times;</button>
+                <div class="wa-modal-body">
+                    <?php include WA_PLUGIN_DIR . 'templates/form-reclamacion.php'; ?>
+                </div>
+            </div>
+        </div>
+        <?php
     }
 
     /**

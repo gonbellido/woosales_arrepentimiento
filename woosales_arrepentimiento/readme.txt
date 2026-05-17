@@ -56,8 +56,9 @@ En **[WooSales.pro](https://woosales.pro)** somos especialistas en WooCommerce p
 
 #### Shortcodes
 
-- **`[wa_formulario_arrepentimiento]`** — Colocalo en una página para mostrar el formulario de reclamación con el texto legal completo.
-- **`[wa_seguimiento]`** — Colocalo en otra página para que los clientes puedan consultar el estado de su trámite.
+- **`[wa_formulario_arrepentimiento]`** — Muestra el formulario completo con el texto legal en cualquier página.
+- **`[wa_boton_arrepentimiento]`** — Muestra un botón que al clickear abre el formulario en un popup responsive. Ideal para headers, sidebars o páginas de producto. Atributo opcional: `texto="Tu texto"`.
+- **`[wa_seguimiento]`** — Página de seguimiento donde el cliente consulta el estado con su código.
 
 #### Widget / Bloque
 
@@ -92,6 +93,10 @@ Cubrimos todos los requisitos técnicos exigidos: botón visible, formulario acc
 = ¿Ofrecen soporte? =
 
 ¡Sí! Dejá tu consulta en el [foro de soporte del plugin](https://wordpress.org/support/plugin/woosales_arrepentimiento/) o contactanos directamente en [WooSales.pro](https://woosales.pro/contacto).
+
+= ¿Puedo mostrar solo un botón en vez del formulario completo? =
+
+Sí. Usá el shortcode <code>[wa_boton_arrepentimiento]</code> donde quieras. Muestra un botón que al clickear abre el formulario en un popup responsive. Podés personalizar el texto con <code>[wa_boton_arrepentimiento texto="Quiero cancelar"]</code>.
 
 = ¿Puedo personalizar los textos legales? =
 

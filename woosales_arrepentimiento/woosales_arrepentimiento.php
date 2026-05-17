@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Botón de Arrepentimiento Argentina — WooSales
  * Plugin URI:      https://woosales.pro/plugin_arrepentimiento_argentina
- * Description:     Botón de Arrepentimiento Argentina para WooCommerce. Cumplí con la Ley 24.240. Usá [wa_formulario_arrepentimiento] para mostrar el formulario y [wa_seguimiento] para el tracking. Código de trámite inmediato y gestión simple.
+ * Description:     Botón de Arrepentimiento Argentina para WooCommerce. Cumplí con la Ley 24.240. Usá [wa_formulario_arrepentimiento], [wa_boton_arrepentimiento] (popup) y [wa_seguimiento]. Código de trámite inmediato.
  * Version:         1.0.0
  * Author:          WooSales.pro
  * Author URI:      https://woosales.pro

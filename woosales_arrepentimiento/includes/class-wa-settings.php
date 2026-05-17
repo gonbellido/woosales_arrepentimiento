@@ -151,7 +151,8 @@ class WA_Settings
                     <tr>
                         <th scope="row"><?php esc_html_e('Shortcodes Disponibles', 'woosales-arrepentimiento'); ?></th>
                         <td>
-                            <p><code>[wa_formulario_arrepentimiento]</code> — <?php esc_html_e('Formulario de reclamación', 'woosales-arrepentimiento'); ?></p>
+                            <p><code>[wa_formulario_arrepentimiento]</code> — <?php esc_html_e('Formulario completo con texto legal', 'woosales-arrepentimiento'); ?></p>
+                            <p><code>[wa_boton_arrepentimiento texto="Botón de Arrepentimiento"]</code> — <?php esc_html_e('Botón que abre el formulario en un popup', 'woosales-arrepentimiento'); ?></p>
                             <p><code>[wa_seguimiento]</code> — <?php esc_html_e('Página de seguimiento por código', 'woosales-arrepentimiento'); ?></p>
                         </td>
                     </tr>
