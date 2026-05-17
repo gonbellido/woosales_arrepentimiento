@@ -1,85 +1,139 @@
 === WooSales Arrepentimiento ===
 Contributors: woosales
-Donate link: https://woosales.com
-Tags: woocommerce, arrepentimiento, ley 24240, reclamaciones, devoluciones, argentina
+Donate link: https://woosales.pro
+Tags: woocommerce, arrepentimiento, ley 24240, reclamaciones, devoluciones, argentina, defensa del consumidor, boton de arrepentimiento, derecho de revocacion, cancelacion de compra
 Requires at least: 5.8
-Tested up to: 6.5
+Tested up to: 6.7
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Plugin WooCommerce para gestionar Reclamaciones de Arrepentimiento según Ley 24.240 (Argentina).
+Plugin #1 en Argentina para gestionar Reclamaciones de Arrepentimiento en WooCommerce. Cumplí con la Ley 24.240 de forma simple y automática. Por **WooSales.pro** — Expertos en WooCommerce para el mercado argentino.
 
 == Description ==
 
-WooSales Arrepentimiento permite a tus clientes ejercer el derecho de arrepentimiento
-de compra exigido por la Ley 24.240 de Defensa del Consumidor en Argentina.
+### ⚖️ Cumplimiento Legal Simplificado
 
-= Funcionalidades =
+**WooSales Arrepentimiento** es la solución definitiva para que tu tienda WooCommerce cumpla con el **derecho de arrepentimiento** exigido por la **Ley 24.240 de Defensa del Consumidor en Argentina**.
 
-* Formulario público de reclamación con texto legal obligatorio.
-* Generación inmediata de código de trámite (`123-4521-20260517`).
-* Email automático al cliente con enlace de seguimiento.
-* Notificación por email al administrador.
-* Página pública de seguimiento: el cliente consulta el estado con su código.
-* Backoffice simple: listado con datos del cliente, filtro por estado, cambio de estado rápido.
-* Workflow de 4 estados: Pendiente → En Revisión → Aprobada → Reintegro Realizado, o Rechazada.
-* Motivo de rechazo visible para el cliente.
-* Botón flotante "Botón de Arrepentimiento" en el footer.
-* Validación de fechas (10 días desde compra, antelación mínima).
+Desarrollado por [WooSales.pro](https://woosales.pro), este plugin cubre todo el flujo: desde el botón de arrepentimiento en tu sitio hasta la gestión administrativa de cada solicitud.
 
-= Shortcodes =
+### ✨ Funcionalidades Principales
 
-* `[wa_formulario_arrepentimiento]` — Formulario de reclamación.
-* `[wa_seguimiento]` — Página de seguimiento por código.
+- **🔘 Botón de Arrepentimiento**: flotante en el footer de tu sitio, 100% configurable.
+- **📝 Formulario Inteligente**: validación automática de fechas (10 días desde compra, antelación mínima según tipo de servicio).
+- **🎫 Código de Trámite Inmediato**: generado y mostrado en pantalla al instante (formato `123-4521-20260517`).
+- **📧 Emails Automáticos**: confirmación al cliente con enlace de seguimiento + notificación al administrador.
+- **🔍 Seguimiento Público**: el cliente consulta el estado de su reclamación con su código, sin necesidad de login.
+- **📊 Backoffice Simple**: listado con todos los datos a la vista, filtro por estado, cambio de estado con un clic.
+- **❌ Motivo de Rechazo**: transparente para el cliente, visible desde la página de seguimiento.
+- **📋 Workflow Completo**: Pendiente → En Revisión → Aprobada → Reintegro Realizado (o Rechazada).
+- **📱 100% Responsive**: funciona en mobile, tablet y desktop.
 
-= Requisitos =
+### 🚀 Desarrollado por WooSales.pro
 
-* WordPress 5.8+
-* WooCommerce 5.0+
-* PHP 7.4+
+En **[WooSales.pro](https://woosales.pro)** somos especialistas en WooCommerce para el mercado argentino. Ofrecemos:
 
-== Installation ==
+- Plugins para facturación electrónica, Mercado Pago, envíos y logística.
+- Integraciones con AFIP, ARCA y sistemas de gestión locales.
+- Desarrollo a medida y soporte técnico especializado.
 
-1. Subir la carpeta `woosales_arrepentimiento` a `/wp-content/plugins/`.
-2. Activar el plugin desde el menú Plugins de WordPress.
-3. Ir a Reclamaciones → Configuración para elegir las páginas de formulario y seguimiento.
-4. Crear una página con el shortcode `[wa_formulario_arrepentimiento]`.
-5. Crear otra página con el shortcode `[wa_seguimiento]`.
-6. ¡Listo! El botón de arrepentimiento aparecerá en el footer.
+👉 **¿Necesitás adaptar este plugin a tu negocio?** [Contactanos en WooSales.pro](https://woosales.pro/contacto)
+
+---
+
+### 📦 Instalación Rápida
+
+1. Instalá el plugin desde el repositorio de WordPress o subí la carpeta `woosales_arrepentimiento` a `/wp-content/plugins/`.
+2. Activá el plugin (requiere WooCommerce activo).
+3. Andá a **Reclamaciones → Configuración** y seleccioná:
+   - La página donde pusiste el shortcode `[wa_formulario_arrepentimiento]`
+   - La página donde pusiste el shortcode `[wa_seguimiento]`
+4. ¡Listo! El botón de arrepentimiento aparece automáticamente en el footer.
+
+### 📖 Uso
+
+#### Shortcodes
+
+- **`[wa_formulario_arrepentimiento]`** — Colocalo en una página para mostrar el formulario de reclamación con el texto legal completo.
+- **`[wa_seguimiento]`** — Colocalo en otra página para que los clientes puedan consultar el estado de su trámite.
+
+#### Widget / Bloque
+
+También podés usar el shortcode en cualquier widget de texto o bloque de HTML en Gutenberg.
 
 == Frequently Asked Questions ==
 
 = ¿Necesito WooCommerce para usar este plugin? =
 
-Sí. El plugin verifica pedidos contra WooCommerce y requiere que esté activo.
+Sí. El plugin está diseñado para integrarse con WooCommerce. Verifica los pedidos contra tu tienda y precarga datos del cliente. Si WooCommerce no está activo, el plugin no se inicializará.
 
 = ¿Qué pasa si el pedido no existe en WooCommerce? =
 
-El formulario muestra una advertencia pero permite enviar la reclamación igual.
-Esto cubre casos de pedidos offline o de otros sistemas.
+El formulario muestra una advertencia pero permite enviar la reclamación igual. Esto cubre escenarios como pedidos offline, reservas telefónicas o migraciones desde otros sistemas.
 
 = ¿Se procesa el reintegro automáticamente? =
 
-No. El plugin gestiona el trámite administrativo. El reintegro lo realiza
-manualmente el administrador según las políticas de la empresa.
+No. **WooSales Arrepentimiento** gestiona el trámite administrativo. El reintegro lo realiza manualmente el administrador. Esto te da control total sobre cada devolución.
 
-= ¿El cliente puede ver el motivo de un rechazo? =
+= ¿El cliente puede ver por qué se rechazó su solicitud? =
 
-Sí. Cuando el administrador cambia una reclamación a "Rechazada", debe ingresar
-un motivo que será visible para el cliente en la página de seguimiento.
+Sí. Cuando un administrador cambia el estado a "Rechazada", debe completar un **motivo de rechazo obligatorio** que es visible para el cliente en la página de seguimiento. Transparencia total.
+
+= ¿Funciona con cualquier theme? =
+
+Sí. Los estilos son autocontenidos y el botón del footer es compatible con cualquier theme. Probado con Storefront, Divi, Astra, GeneratePress y temas personalizados.
+
+= ¿Cumple realmente con la Ley 24.240? =
+
+Cubrimos todos los requisitos técnicos exigidos: botón visible, formulario accesible, entrega inmediata de código de trámite, y comunicación electrónica. **Siempre recomendamos consultar con un asesor legal** para validar la implementación en tu caso particular.
+
+= ¿Ofrecen soporte? =
+
+¡Sí! Dejá tu consulta en el [foro de soporte del plugin](https://wordpress.org/support/plugin/woosales_arrepentimiento/) o contactanos directamente en [WooSales.pro](https://woosales.pro/contacto).
+
+= ¿Puedo personalizar los textos legales? =
+
+Los textos se basan en la Ley 24.240. Si necesitás adaptarlos, [contactanos](https://woosales.pro/contacto) para un desarrollo a medida.
+
+== Screenshots ==
+
+1. Formulario público de arrepentimiento con texto legal y campos de pedido, nombre, email y fecha de reserva.
+2. Respuesta exitosa con código de trámite inmediato y enlace de seguimiento.
+3. Email que recibe el cliente con código, estado y botón para consultar.
+4. Página de seguimiento público donde el cliente consulta el estado con su código.
+5. Listado de reclamaciones en el backoffice con columnas: código, pedido, cliente, email, estado, fecha.
+6. Metabox de cambio de estado con motivo de rechazo obligatorio e historial de cambios.
+7. Página de configuración: email admin, páginas de shortcode, botón footer.
 
 == Changelog ==
 
-= 1.0.0 =
-* Versión inicial.
-* CPT Reclamaciones, formulario público, código de trámite.
-* Emails automáticos, página de seguimiento.
-* Backoffice con columnas personalizadas y cambio de estado.
-* Botón footer y configuración del plugin.
+= 1.0.0 — 2026-05-17 =
+* 🚀 Lanzamiento inicial.
+* CPT Reclamaciones con workflow de 5 estados.
+* Formulario público con validación legal de fechas.
+* Código de trámite inmediato (formato compuesto).
+* Emails HTML automáticos (cliente + admin).
+* Página de seguimiento público.
+* Backoffice con columnas personalizadas, filtros y cambio rápido de estado.
+* Motivo de rechazo visible para el cliente.
+* Botón de arrepentimiento flotante en footer.
+* Página de configuración del plugin.
 
 == Upgrade Notice ==
 
 = 1.0.0 =
-Primera versión. Instalar y configurar las páginas de shortcode.
+Primera versión. Instalá, configurá las páginas de shortcode y activá el botón de arrepentimiento. Recomendamos probar en un entorno de staging antes de pasar a producción.
+
+== ¿Te gusta WooSales Arrepentimiento? ==
+
+Si este plugin te ayudó a cumplir con la Ley 24.240 y simplificó la gestión de reclamaciones en tu tienda, **¡dejanos una review!** ⭐⭐⭐⭐⭐
+
+👉 [Dejar una reseña en WordPress.org](https://wordpress.org/support/plugin/woosales_arrepentimiento/reviews/#new-post)
+
+Tu valoración nos ayuda a mantener el plugin actualizado y gratuito. ¡Gracias por apoyar el software libre argentino!
+
+---
+
+**WooSales Arrepentimiento** es desarrollado y mantenido por **[WooSales.pro](https://woosales.pro)** — Soluciones profesionales de WooCommerce para Argentina.

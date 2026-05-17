@@ -158,6 +158,38 @@ class WA_Settings
                 </table>
                 <?php submit_button(); ?>
             </form>
+
+            <div style="margin-top:30px;padding:20px;background:#fff;border:1px solid #ccd0d4;border-left:4px solid #0073aa;border-radius:4px;">
+                <p style="margin:0;font-size:14px;">
+                    <strong>🚀 <?php esc_html_e('¿Necesitás más funcionalidades para tu WooCommerce en Argentina?', 'woosales-arrepentimiento'); ?></strong>
+                </p>
+                <p style="margin:8px 0 0;color:#555;">
+                    <?php esc_html_e('En', 'woosales-arrepentimiento'); ?>
+                    <a href="https://woosales.pro?utm_source=plugin&utm_medium=settings&utm_campaign=arrepentimiento" target="_blank" rel="noopener">
+                        <strong>WooSales.pro</strong></a>
+                    <?php esc_html_e('desarrollamos soluciones a medida: facturación electrónica, integración con Mercado Pago, envíos, gestión de stock y mucho más.', 'woosales-arrepentimiento'); ?>
+                </p>
+                <p style="margin:8px 0 0;">
+                    <a href="https://woosales.pro/contacto?utm_source=plugin&utm_medium=settings&utm_campaign=arrepentimiento"
+                       target="_blank" rel="noopener" class="button">
+                        <?php esc_html_e('Contactar a WooSales.pro', 'woosales-arrepentimiento'); ?>
+                    </a>
+                </p>
+            </div>
+
+            <div style="margin-top:16px;text-align:center;font-size:12px;color:#999;">
+                <p>
+                    <?php esc_html_e('Botón de Arrepentimiento Argentina', 'woosales-arrepentimiento'); ?>
+                    v<?php echo esc_html(WA_VERSION); ?>
+                    &mdash;
+                    <?php esc_html_e('Desarrollado con ❤️ por', 'woosales-arrepentimiento'); ?>
+                    <a href="https://woosales.pro?utm_source=plugin&utm_medium=settings&utm_campaign=arrepentimiento" target="_blank" rel="noopener">WooSales.pro</a>
+                    |
+                    <a href="https://wordpress.org/support/plugin/woosales_arrepentimiento/reviews/#new-post" target="_blank" rel="noopener">
+                        <?php esc_html_e('Dejar una reseña ⭐', 'woosales-arrepentimiento'); ?>
+                    </a>
+                </p>
+            </div>
         </div>
         <?php
     }

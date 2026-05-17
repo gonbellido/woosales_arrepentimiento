@@ -26,6 +26,7 @@ class WA_Loader
             'class-wa-tracking.php'    => WA_Tracking::class,
             'class-wa-admin.php'       => WA_Admin::class,
             'class-wa-settings.php'    => WA_Settings::class,
+            'class-wa-review.php'      => WA_Review::class,
         ];
 
         foreach ($classes as $file => $class) {
@@ -40,6 +41,7 @@ class WA_Loader
         self::$instances['tracking']     = new WA_Tracking();
         self::$instances['admin']        = new WA_Admin();
         self::$instances['settings']     = new WA_Settings();
+        self::$instances['review']       = new WA_Review();
     }
 
     public static function get(string $key): ?object

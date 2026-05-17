@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name:     WooSales Arrepentimiento
+ * Plugin Name:     Botón de Arrepentimiento Argentina — WooSales
  * Plugin URI:      https://github.com/gonbellido/woosales_arrepentimiento
- * Description:     Gestión de Reclamaciones de Arrepentimiento para WooCommerce según Ley 24.240 (Argentina). Formulario público, código de trámite, seguimiento y backoffice simple.
+ * Description:     Botón de Arrepentimiento Argentina para WooCommerce. Cumplí con la Ley 24.240 de Defensa del Consumidor. Formulario público, código de trámite inmediato, seguimiento y gestión simple de reclamaciones.
  * Version:         1.0.0
- * Author:          WooSales
- * Author URI:      https://woosales.com
+ * Author:          WooSales.pro
+ * Author URI:      https://woosales.pro
  * License:         GPL-2.0+
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:     woosales-arrepentimiento
@@ -13,7 +13,7 @@
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * WC requires at least: 5.0
- * WC tested up to:   8.9
+ * WC tested up to:   9.4
  */
 
 if (!defined('ABSPATH')) {
