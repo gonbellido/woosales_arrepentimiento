@@ -60,6 +60,60 @@ class WA_Settings
             'sanitize_callback' => 'sanitize_text_field',
             'default'           => 'Botón de Arrepentimiento',
         ]);
+
+        register_setting('wa_settings_group', 'wa_texto_legal_tipo', [
+            'type'              => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default'           => 'servicios',
+        ]);
+
+        register_setting('wa_settings_group', 'wa_texto_legal_custom', [
+            'type'              => 'string',
+            'sanitize_callback' => 'wp_kses_post',
+            'default'           => '',
+        ]);
+    }
+
+    /**
+     * Devuelve el HTML del aviso legal según la configuración.
+     */
+    public static function get_legal_text(): string
+    {
+        $tipo = get_option('wa_texto_legal_tipo', 'servicios');
+
+        if ($tipo === 'custom') {
+            $custom = get_option('wa_texto_legal_custom', '');
+            if (!empty($custom)) {
+                return wp_kses_post(wpautop($custom));
+            }
+        }
+
+        if ($tipo === 'productos') {
+            return self::texto_productos();
+        }
+
+        return self::texto_servicios();
+    }
+
+    private static function texto_productos(): string
+    {
+        return
+            '<p><strong>' . esc_html__('A fin de ejercer su derecho de revocación de compra, tenga presente lo siguiente:', 'woosales-arrepentimiento') . '</strong></p>' .
+            '<p>' . esc_html__('El derecho de arrepentimiento (Ley 24.240) puede ejercerse dentro de los 10 días corridos desde la fecha de recepción del producto, sin necesidad de invocar causa alguna.', 'woosales-arrepentimiento') . '</p>' .
+            '<p>' . esc_html__('La devolución se realizará a través del mismo medio de pago utilizado para la compra. Tarjetas de Crédito y Débito: se acreditará en el resumen siguiente. QR y transferencia: hasta 45 días hábiles una vez recibidos CBU y CUIL.', 'woosales-arrepentimiento') . '</p>' .
+            '<p>' . esc_html__('El producto debe devolverse en el mismo estado en que fue recibido. Se reintegrará el monto total abonado.', 'woosales-arrepentimiento') . '</p>' .
+            '<blockquote class="wa-highlight">' . esc_html__('El derecho de arrepentimiento (Ley 24.240) podrá ejercerse dentro de los 10 días corridos desde la recepción del producto. El consumidor podrá devolver el producto sin necesidad de invocar causa alguna y solicitar la devolución íntegra del monto abonado.', 'woosales-arrepentimiento') . '</blockquote>';
+    }
+
+    private static function texto_servicios(): string
+    {
+        return
+            '<p><strong>' . esc_html__('A fin de ejercer su derecho de revocación de compra, tenga presente lo siguiente:', 'woosales-arrepentimiento') . '</strong></p>' .
+            '<p>' . esc_html__('El derecho de arrepentimiento (Ley 24.240) puede ejercerse dentro de los 10 días corridos desde la fecha de compra online, siempre que el servicio no haya sido prestado. Es fundamental completar la solicitud con al menos 48 horas hábiles de anticipación al inicio del servicio.', 'woosales-arrepentimiento') . '</p>' .
+            '<p>' . esc_html__('Si la fecha del servicio ya transcurrió, no será posible realizar el reintegro.', 'woosales-arrepentimiento') . '</p>' .
+            '<p>' . esc_html__('La devolución se realizará a través del mismo medio de pago utilizado para la compra. Tarjetas de Crédito y Débito: se acreditará en el resumen siguiente. QR y transferencia: hasta 45 días una vez recibidos CBU y CUIL.', 'woosales-arrepentimiento') . '</p>' .
+            '<p>' . esc_html__('Se reintegrará el monto total del pedido. No se realizarán reintegros parciales.', 'woosales-arrepentimiento') . '</p>' .
+            '<blockquote class="wa-highlight">' . esc_html__('El derecho de arrepentimiento (Ley 24.240) podrá ejercerse dentro de los 10 días corridos desde la fecha de compra, siempre que sea comunicado con una antelación mínima de 48 horas hábiles al inicio del servicio contratado. Una vez prestado el servicio, el derecho de arrepentimiento carecerá de validez.', 'woosales-arrepentimiento') . '</blockquote>';
     }
 
     public function render_page(): void
@@ -149,6 +203,38 @@ class WA_Settings
                     </tr>
 
                     <tr>
+                        <th scope="row">
+                            <label for="wa_texto_legal_tipo"><?php esc_html_e('Texto Legal del Formulario', 'woosales-arrepentimiento'); ?></label>
+                        </th>
+                        <td>
+                            <?php $tipo_actual = get_option('wa_texto_legal_tipo', 'servicios'); ?>
+                            <select name="wa_texto_legal_tipo" id="wa_texto_legal_tipo">
+                                <option value="servicios" <?php selected($tipo_actual, 'servicios'); ?>>
+                                    <?php esc_html_e('Versión Servicios (viajes, turnos, reservas)', 'woosales-arrepentimiento'); ?>
+                                </option>
+                                <option value="productos" <?php selected($tipo_actual, 'productos'); ?>>
+                                    <?php esc_html_e('Versión Productos (e-commerce, venta de artículos)', 'woosales-arrepentimiento'); ?>
+                                </option>
+                                <option value="custom" <?php selected($tipo_actual, 'custom'); ?>>
+                                    <?php esc_html_e('Personalizado (escribí tu propio texto)', 'woosales-arrepentimiento'); ?>
+                                </option>
+                            </select>
+                            <p class="description"><?php esc_html_e('Elegí el texto que mejor describe tu negocio. Aplica la Ley 24.240 según el tipo de producto o servicio.', 'woosales-arrepentimiento'); ?></p>
+                        </td>
+                    </tr>
+
+                    <tr id="wa_texto_custom_row" style="<?php echo $tipo_actual === 'custom' ? '' : 'display:none;'; ?>">
+                        <th scope="row">
+                            <label for="wa_texto_legal_custom"><?php esc_html_e('Texto Personalizado', 'woosales-arrepentimiento'); ?></label>
+                        </th>
+                        <td>
+                            <textarea name="wa_texto_legal_custom" id="wa_texto_legal_custom"
+                                      rows="10" class="large-text"><?php echo esc_textarea(get_option('wa_texto_legal_custom', '')); ?></textarea>
+                            <p class="description"><?php esc_html_e('Podés usar HTML básico (p, strong, em, ul, li, blockquote). Este texto reemplaza completamente el aviso legal del formulario.', 'woosales-arrepentimiento'); ?></p>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <th scope="row"><?php esc_html_e('Shortcodes Disponibles', 'woosales-arrepentimiento'); ?></th>
                         <td>
                             <p><code>[wa_formulario_arrepentimiento]</code> — <?php esc_html_e('Formulario completo con texto legal', 'woosales-arrepentimiento'); ?></p>
@@ -159,6 +245,18 @@ class WA_Settings
                 </table>
                 <?php submit_button(); ?>
             </form>
+
+            <script>
+            jQuery(function($){
+                $('#wa_texto_legal_tipo').on('change', function(){
+                    if ($(this).val() === 'custom') {
+                        $('#wa_texto_custom_row').show();
+                    } else {
+                        $('#wa_texto_custom_row').hide();
+                    }
+                });
+            });
+            </script>
 
             <div style="margin-top:30px;padding:20px;background:#fff;border:1px solid #ccd0d4;border-left:4px solid #0073aa;border-radius:4px;">
                 <p style="margin:0;font-size:14px;">

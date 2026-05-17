@@ -16,19 +16,7 @@ if (!defined('ABSPATH')) {
     <h2 class="wa-form-title"><?php esc_html_e('Derecho de Arrepentimiento — Ley 24.240', 'woosales-arrepentimiento'); ?></h2>
 
     <div class="wa-legal-notice">
-        <p><strong><?php esc_html_e('A fin de ejercer su derecho de revocación de compra, es fundamental tener presente lo siguiente:', 'woosales-arrepentimiento'); ?></strong></p>
-
-        <p><?php esc_html_e('Para SERVICIOS POR EL DÍA: no más de 10 días corridos desde el momento en que realizó la compra online. En caso de que la fecha de la reserva ya haya transcurrido, no será posible realizar un reintegro. Por este motivo, es fundamental que complete la solicitud al menos 24 horas antes del servicio.', 'woosales-arrepentimiento'); ?></p>
-
-        <p><?php esc_html_e('Para SERVICIOS DE ALOJAMIENTO: no más de 10 días corridos desde el momento en que se realizó el pago, ni menos de 10 días antes de la fecha de ingreso a nuestro hotel.', 'woosales-arrepentimiento'); ?></p>
-
-        <p><?php esc_html_e('La devolución se realizará a través del medio de pago utilizado para la compra. Tarjetas de Crédito y Débito: se acreditará en el resumen siguiente ya que se solicitará una anulación de la compra. QR y transferencia: demora de 45 días una vez recibidos el CBU y CUIL.', 'woosales-arrepentimiento'); ?></p>
-
-        <p><?php esc_html_e('Se reintegrará el monto total del pedido realizado. No se realizarán reintegros parciales.', 'woosales-arrepentimiento'); ?></p>
-
-        <blockquote class="wa-highlight">
-            <?php esc_html_e('El derecho de arrepentimiento (Ley 24.240) podrá ejercerse dentro de los 10 días corridos desde la fecha de compra, siempre que el mismo sea comunicado con una antelación mínima de 48 horas hábiles al inicio del servicio contratado. Una vez prestado el servicio, o si el plazo de 10 días excede la fecha de la reserva, el derecho de arrepentimiento carecerá de validez, rigiéndose la cancelación por nuestras políticas comerciales vigentes.', 'woosales-arrepentimiento'); ?>
-        </blockquote>
+        <?php echo isset($wa_texto_legal) ? wp_kses_post($wa_texto_legal) : \WoosalesArrepentimiento\WA_Settings::get_legal_text(); ?>
     </div>
 
     <form class="wa-form" novalidate>

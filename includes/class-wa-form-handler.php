@@ -78,6 +78,7 @@ class WA_Form_Handler
     public function render_form(): string
     {
         $this->do_enqueue_assets();
+        $wa_texto_legal = WA_Settings::get_legal_text();
         ob_start();
         include WA_PLUGIN_DIR . 'templates/form-reclamacion.php';
         return ob_get_clean();
@@ -110,6 +111,7 @@ class WA_Form_Handler
         // Renderizar modal solo la primera vez
         $modal = '';
         if ($es_primera_vez) {
+            $wa_texto_legal = WA_Settings::get_legal_text();
             ob_start();
             ?>
             <div class="wa-modal-overlay" id="wa-modal" style="display:none;">
