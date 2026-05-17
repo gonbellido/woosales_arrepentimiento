@@ -51,7 +51,7 @@ if (!defined('ABSPATH')) {
                 </div>
 
                 <div class="wa-result-item">
-                    <span class="wa-result-label"><?php esc_html_e('Fechaa de Solicitud', 'woosales-arrepentimiento'); ?></span>
+                    <span class="wa-result-label"><?php esc_html_e('Fecha de Solicitud', 'woosales-arrepentimiento'); ?></span>
                     <span class="wa-result-value"><?php echo esc_html($resultado['fecha_creacion']); ?></span>
                 </div>
 

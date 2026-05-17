@@ -1,4 +1,4 @@
-=== WooSales Arrepentimiento ===
+=== Botón de Arrepentimiento Argentina — WooSales ===
 Contributors: woosales
 Donate link: https://woosales.pro
 Tags: woocommerce, arrepentimiento, ley 24240, reclamaciones, devoluciones, argentina, defensa del consumidor, boton de arrepentimiento, derecho de revocacion, cancelacion de compra
