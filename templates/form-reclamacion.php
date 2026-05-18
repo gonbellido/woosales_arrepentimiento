@@ -20,8 +20,8 @@ if (!defined('ABSPATH')) {
     </div>
 
     <form class="wa-form" novalidate>
-        <!-- Honeypot: oculto via CSS, no lo ve el usuario, bots lo llenan -->
-        <div class="wa-hp-field" aria-hidden="true">
+        <!-- Honeypot: fuera de pantalla, no visible para humanos -->
+        <div class="wa-hp-field" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;overflow:hidden;opacity:0;pointer-events:none;">
             <label for="wa_website"><?php esc_html_e('Sitio web', 'woosales-arrepentimiento'); ?></label>
             <input type="text" name="wa_website" id="wa_website" tabindex="-1" autocomplete="off" value="">
         </div>
