@@ -324,7 +324,8 @@ class WA_Form_Handler
 
         // Precargar datos del pedido si existe
         $order = wc_get_order($pedido_id);
-        $fecha_pedido = $order ? $order->get_date_created()?->date('d/m/Y') : '—';
+        $date_created = $order ? $order->get_date_created() : null;
+        $fecha_pedido = $date_created ? $date_created->date('d/m/Y') : '—';
         $nombre_pedido = $order ? ($order->get_billing_first_name() . ' ' . $order->get_billing_last_name()) : '';
 
         // Si el nombre no coincide con el del pedido, usar el ingresado
