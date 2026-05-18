@@ -37,14 +37,14 @@ class WA_Admin
         foreach ($columns as $key => $value) {
             $nuevas[$key] = $value;
             if ($key === 'title') {
-                $nuevas['wa_codigo'] = __('Código', 'woosales-arrepentimiento');
+                $nuevas['wa_codigo'] = __('Código', 'boton-de-arrepentimiento-argentina-woosales');
             }
         }
-        $nuevas['wa_pedido']  = __('Pedido', 'woosales-arrepentimiento');
-        $nuevas['wa_cliente'] = __('Cliente', 'woosales-arrepentimiento');
-        $nuevas['wa_email']   = __('Email', 'woosales-arrepentimiento');
-        $nuevas['wa_estado']  = __('Estado', 'woosales-arrepentimiento');
-        $nuevas['wa_fecha']   = __('Fecha Pedido', 'woosales-arrepentimiento');
+        $nuevas['wa_pedido']  = __('Pedido', 'boton-de-arrepentimiento-argentina-woosales');
+        $nuevas['wa_cliente'] = __('Cliente', 'boton-de-arrepentimiento-argentina-woosales');
+        $nuevas['wa_email']   = __('Email', 'boton-de-arrepentimiento-argentina-woosales');
+        $nuevas['wa_estado']  = __('Estado', 'boton-de-arrepentimiento-argentina-woosales');
+        $nuevas['wa_fecha']   = __('Fecha Pedido', 'boton-de-arrepentimiento-argentina-woosales');
 
         // Quitar columnas no necesarias
         unset($nuevas['date']);
@@ -110,10 +110,10 @@ class WA_Admin
             return;
         }
 
-        $current = sanitize_text_field(wp_unslash($_GET['wa_estado'] ?? ''));
+        $current = sanitize_text_field(wp_unslash($_GET['wa_estado'] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin list filter, no state change.
         ?>
         <select name="wa_estado">
-            <option value=""><?php esc_html_e('Todos los estados', 'woosales-arrepentimiento'); ?></option>
+            <option value=""><?php esc_html_e('Todos los estados', 'boton-de-arrepentimiento-argentina-woosales'); ?></option>
             <?php foreach (WA_Status::labels() as $key => $label): ?>
                 <option value="<?php echo esc_attr($key); ?>" <?php selected($current, $key); ?>>
                     <?php echo esc_html($label); ?>
@@ -136,7 +136,7 @@ class WA_Admin
             return;
         }
 
-        $estado = sanitize_text_field(wp_unslash($_GET['wa_estado'] ?? ''));
+        $estado = sanitize_text_field(wp_unslash($_GET['wa_estado'] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin list filter, no state change.
         if (!empty($estado) && in_array($estado, WA_Status::estados(), true)) {
             $query->set('meta_key', '_wa_estado');
             $query->set('meta_value', $estado);
@@ -174,7 +174,7 @@ class WA_Admin
                 '<a href="%s" style="color:%s;">%s → %s</a>',
                 esc_url($url),
                 esc_attr(WA_Status::color($nuevo_estado)),
-                esc_html__('Marcar', 'woosales-arrepentimiento'),
+                esc_html__('Marcar', 'boton-de-arrepentimiento-argentina-woosales'),
                 esc_html(WA_Status::label($nuevo_estado))
             );
         }
@@ -187,21 +187,22 @@ class WA_Admin
      */
     public function handle_quick_status(): void
     {
-        $post_id = (int) ($_GET['post_id'] ?? 0);
+        $post_id = absint(wp_unslash($_GET['post_id'] ?? 0));
         $estado  = sanitize_text_field(wp_unslash($_GET['estado'] ?? ''));
+        $nonce   = sanitize_text_field(wp_unslash($_GET['_wpnonce'] ?? ''));
 
-        if (!$post_id || !wp_verify_nonce($_GET['_wpnonce'] ?? '', 'wa_quick_status_' . $post_id)) {
-            wp_die(__('Acción no autorizada.', 'woosales-arrepentimiento'));
+        if (!$post_id || !wp_verify_nonce($nonce, 'wa_quick_status_' . $post_id)) {
+            wp_die(esc_html__('Acción no autorizada.', 'boton-de-arrepentimiento-argentina-woosales'));
         }
 
         if (!current_user_can('edit_post', $post_id)) {
-            wp_die(__('No tenés permisos.', 'woosales-arrepentimiento'));
+            wp_die(esc_html__('No tenés permisos.', 'boton-de-arrepentimiento-argentina-woosales'));
         }
 
         $estado_actual = get_post_meta($post_id, '_wa_estado', true) ?: WA_Status::default();
 
         if (!WA_Status::can_transition($estado_actual, $estado) && !current_user_can('manage_options')) {
-            wp_die(__('Transición de estado no permitida.', 'woosales-arrepentimiento'));
+            wp_die(esc_html__('Transición de estado no permitida.', 'boton-de-arrepentimiento-argentina-woosales'));
         }
 
         update_post_meta($post_id, '_wa_estado', $estado);
@@ -212,7 +213,8 @@ class WA_Admin
             'fecha' => current_time('Y-m-d H:i:s'),
             'de'    => $estado_actual,
             'a'     => $estado,
-            'nota'  => sprintf(__('Cambio rápido desde listado por %s', 'woosales-arrepentimiento'), wp_get_current_user()->display_name),
+            // translators: %s is the user's display name.
+            'nota'  => sprintf(__('Cambio rápido desde listado por %s', 'boton-de-arrepentimiento-argentina-woosales'), wp_get_current_user()->display_name),
             'user'  => get_current_user_id(),
         ];
         update_post_meta($post_id, '_wa_log_estados', $log);
@@ -234,20 +236,20 @@ class WA_Admin
 
         wp_enqueue_style(
             'wa-admin-css',
-            WA_PLUGIN_URL . 'assets/css/wa-admin.css',
+            WOOSALES_ARG_PLUGIN_URL . 'assets/css/wa-admin.css',
             [],
-            WA_VERSION
+            WOOSALES_ARG_VERSION
         );
 
         wp_enqueue_script(
             'wa-admin-js',
-            WA_PLUGIN_URL . 'assets/js/wa-admin.js',
+            WOOSALES_ARG_PLUGIN_URL . 'assets/js/wa-admin.js',
             ['jquery'],
-            WA_VERSION,
+            WOOSALES_ARG_VERSION,
             true
         );
         wp_localize_script('wa-admin-js', 'WA_Admin', [
-            'confirm_status' => __('¿Confirmás cambiar el estado?', 'woosales-arrepentimiento'),
+            'confirm_status' => __('¿Confirmás cambiar el estado?', 'boton-de-arrepentimiento-argentina-woosales'),
         ]);
     }
 }

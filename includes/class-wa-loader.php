@@ -30,7 +30,7 @@ class WA_Loader
         ];
 
         foreach ($classes as $file => $class) {
-            require_once WA_PLUGIN_DIR . 'includes/' . $file;
+            require_once WOOSALES_ARG_PLUGIN_DIR . 'includes/' . $file;
         }
 
         // Construir cada clase
@@ -46,7 +46,7 @@ class WA_Loader
         // Elementor widgets — class_exists() fuerza el autoload antes del require,
         // garantizando que Widget_Base esté disponible para la herencia.
         if (did_action('elementor/loaded') && class_exists('\Elementor\Widget_Base')) {
-            require_once WA_PLUGIN_DIR . 'includes/class-wa-elementor.php';
+            require_once WOOSALES_ARG_PLUGIN_DIR . 'includes/class-wa-elementor.php';
             self::$instances['elementor'] = new WA_Elementor();
         }
     }

@@ -30,19 +30,19 @@ class WA_Tracking
     public function render_tracking(): string
     {
         wp_enqueue_style('wa-form-css');
-        $codigo = sanitize_text_field($_GET['codigo'] ?? '');
+        $codigo = sanitize_text_field(wp_unslash($_GET['codigo'] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Public tracking lookup, read-only.
         $resultado = null;
         $error = '';
 
         if (!empty($codigo)) {
             $resultado = $this->buscar_reclamacion($codigo);
             if (!$resultado) {
-                $error = __('No se encontró ninguna reclamación con ese código de trámite.', 'woosales-arrepentimiento');
+                $error = __('No se encontró ninguna reclamación con ese código de trámite.', 'boton-de-arrepentimiento-argentina-woosales');
             }
         }
 
         ob_start();
-        include WA_PLUGIN_DIR . 'templates/tracking-page.php';
+        include WOOSALES_ARG_PLUGIN_DIR . 'templates/tracking-page.php';
         return ob_get_clean();
     }
 
