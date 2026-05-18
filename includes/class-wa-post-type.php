@@ -28,17 +28,17 @@ class WA_Post_Type
     public function register(): void
     {
         $labels = [
-            'name'               => __('Reclamaciones', 'boton-de-arrepentimiento-argentina-woosales'),
-            'singular_name'      => __('Reclamación', 'boton-de-arrepentimiento-argentina-woosales'),
-            'menu_name'          => __('Reclamaciones', 'boton-de-arrepentimiento-argentina-woosales'),
-            'add_new'            => __('Agregar Nueva', 'boton-de-arrepentimiento-argentina-woosales'),
-            'add_new_item'       => __('Nueva Reclamación', 'boton-de-arrepentimiento-argentina-woosales'),
-            'edit_item'          => __('Editar Reclamación', 'boton-de-arrepentimiento-argentina-woosales'),
-            'view_item'          => __('Ver Reclamación', 'boton-de-arrepentimiento-argentina-woosales'),
-            'all_items'          => __('Todas las Reclamaciones', 'boton-de-arrepentimiento-argentina-woosales'),
-            'search_items'       => __('Buscar Reclamaciones', 'boton-de-arrepentimiento-argentina-woosales'),
-            'not_found'          => __('No se encontraron reclamaciones.', 'boton-de-arrepentimiento-argentina-woosales'),
-            'not_found_in_trash' => __('No hay reclamaciones en papelera.', 'boton-de-arrepentimiento-argentina-woosales'),
+            'name'               => __('Reclamaciones', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            'singular_name'      => __('Reclamación', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            'menu_name'          => __('Reclamaciones', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            'add_new'            => __('Agregar Nueva', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            'add_new_item'       => __('Nueva Reclamación', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            'edit_item'          => __('Editar Reclamación', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            'view_item'          => __('Ver Reclamación', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            'all_items'          => __('Todas las Reclamaciones', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            'search_items'       => __('Buscar Reclamaciones', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            'not_found'          => __('No se encontraron reclamaciones.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            'not_found_in_trash' => __('No hay reclamaciones en papelera.', 'boton-de-arrepentimiento-argentina-woosales-2'),
         ];
 
         $args = [
@@ -67,7 +67,7 @@ class WA_Post_Type
     {
         add_meta_box(
             'wa_datos_reclamacion',
-            __('Datos de la Reclamación', 'boton-de-arrepentimiento-argentina-woosales'),
+            __('Datos de la Reclamación', 'boton-de-arrepentimiento-argentina-woosales-2'),
             [$this, 'render_metabox_datos'],
             self::CPT_SLUG,
             'normal',
@@ -76,7 +76,7 @@ class WA_Post_Type
 
         add_meta_box(
             'wa_gestion_reclamacion',
-            __('Gestión de Estado', 'boton-de-arrepentimiento-argentina-woosales'),
+            __('Gestión de Estado', 'boton-de-arrepentimiento-argentina-woosales-2'),
             [$this, 'render_metabox_gestion'],
             self::CPT_SLUG,
             'side',
@@ -100,11 +100,11 @@ class WA_Post_Type
         ?>
         <table class="form-table">
             <tr>
-                <th><label><?php esc_html_e('Código de Trámite', 'boton-de-arrepentimiento-argentina-woosales'); ?></label></th>
+                <th><label><?php esc_html_e('Código de Trámite', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></label></th>
                 <td><strong><?php echo esc_html($codigo); ?></strong></td>
             </tr>
             <tr>
-                <th><label><?php esc_html_e('Pedido WooCommerce', 'boton-de-arrepentimiento-argentina-woosales'); ?></label></th>
+                <th><label><?php esc_html_e('Pedido WooCommerce', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></label></th>
                 <td>
                     <?php if ($pedido_id && ($order = wc_get_order($pedido_id))): ?>
                         <a href="<?php echo esc_url($order->get_edit_order_url()); ?>">
@@ -114,21 +114,21 @@ class WA_Post_Type
                     <?php else: ?>
                         #<?php echo esc_html($pedido_id); ?>
                         <?php if ($pedido_id): ?>
-                            <em>(<?php esc_html_e('Pedido no encontrado en WooCommerce', 'boton-de-arrepentimiento-argentina-woosales'); ?>)</em>
+                            <em>(<?php esc_html_e('Pedido no encontrado en WooCommerce', 'boton-de-arrepentimiento-argentina-woosales-2'); ?>)</em>
                         <?php endif; ?>
                     <?php endif; ?>
                 </td>
             </tr>
             <tr>
-                <th><label><?php esc_html_e('Email Cliente', 'boton-de-arrepentimiento-argentina-woosales'); ?></label></th>
+                <th><label><?php esc_html_e('Email Cliente', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></label></th>
                 <td><a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a></td>
             </tr>
             <tr>
-                <th><label><?php esc_html_e('Fecha del Pedido', 'boton-de-arrepentimiento-argentina-woosales'); ?></label></th>
+                <th><label><?php esc_html_e('Fecha del Pedido', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></label></th>
                 <td><?php echo esc_html($fecha_pedido); ?></td>
             </tr>
             <tr>
-                <th><label><?php esc_html_e('Estado Actual', 'boton-de-arrepentimiento-argentina-woosales'); ?></label></th>
+                <th><label><?php esc_html_e('Estado Actual', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></label></th>
                 <td>
                     <span class="wa-badge" style="background:<?php echo esc_attr(WA_Status::color($estado)); ?>">
                         <?php echo esc_html(WA_Status::label($estado)); ?>
@@ -137,7 +137,7 @@ class WA_Post_Type
             </tr>
             <?php if ($estado === WA_Status::RECHAZADA && $motivo_rechazo): ?>
             <tr>
-                <th><label><?php esc_html_e('Motivo de Rechazo', 'boton-de-arrepentimiento-argentina-woosales'); ?></label></th>
+                <th><label><?php esc_html_e('Motivo de Rechazo', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></label></th>
                 <td style="color:#d9534f;"><?php echo esc_html($motivo_rechazo); ?></td>
             </tr>
             <?php endif; ?>
@@ -155,9 +155,9 @@ class WA_Post_Type
         $log           = get_post_meta($post->ID, '_wa_log_estados', true) ?: [];
         ?>
         <p>
-            <label for="wa_nuevo_estado"><strong><?php esc_html_e('Cambiar a:', 'boton-de-arrepentimiento-argentina-woosales'); ?></strong></label>
+            <label for="wa_nuevo_estado"><strong><?php esc_html_e('Cambiar a:', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></strong></label>
             <select name="wa_nuevo_estado" id="wa_nuevo_estado" style="width:100%;margin-top:4px;">
-                <option value="">— <?php esc_html_e('Sin cambio', 'boton-de-arrepentimiento-argentina-woosales'); ?> —</option>
+                <option value="">— <?php esc_html_e('Sin cambio', 'boton-de-arrepentimiento-argentina-woosales-2'); ?> —</option>
                 <?php foreach ($transitions as $estado): ?>
                     <option value="<?php echo esc_attr($estado); ?>">
                         <?php echo esc_html(WA_Status::label($estado)); ?>
@@ -167,18 +167,18 @@ class WA_Post_Type
         </p>
 
         <p id="wa_motivo_rechazo_wrap" style="display:none;">
-            <label for="wa_motivo_rechazo"><strong><?php esc_html_e('Motivo de Rechazo (obligatorio):', 'boton-de-arrepentimiento-argentina-woosales'); ?></strong></label>
+            <label for="wa_motivo_rechazo"><strong><?php esc_html_e('Motivo de Rechazo (obligatorio):', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></strong></label>
             <textarea name="wa_motivo_rechazo" id="wa_motivo_rechazo" rows="3" style="width:100%;margin-top:4px;"></textarea>
         </p>
 
         <p>
-            <label for="wa_nota_interna"><strong><?php esc_html_e('Nota Interna:', 'boton-de-arrepentimiento-argentina-woosales'); ?></strong></label>
+            <label for="wa_nota_interna"><strong><?php esc_html_e('Nota Interna:', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></strong></label>
             <textarea name="wa_nota_interna" id="wa_nota_interna" rows="2" style="width:100%;margin-top:4px;"></textarea>
         </p>
 
         <?php if (!empty($log)): ?>
         <hr>
-        <p><strong><?php esc_html_e('Historial de cambios:', 'boton-de-arrepentimiento-argentina-woosales'); ?></strong></p>
+        <p><strong><?php esc_html_e('Historial de cambios:', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></strong></p>
         <ul style="font-size:12px;max-height:150px;overflow-y:auto;">
             <?php foreach (array_reverse($log) as $entry): ?>
                 <li>

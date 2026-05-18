@@ -74,26 +74,26 @@ class WA_Review
             <div style="font-size:32px;line-height:1;">⭐</div>
             <div style="flex:1;">
                 <p style="font-size:14px;margin:0 0 8px;">
-                    <strong><?php esc_html_e('¿Te está sirviendo el Botón de Arrepentimiento Argentina?', 'boton-de-arrepentimiento-argentina-woosales'); ?></strong>
+                    <strong><?php esc_html_e('¿Te está sirviendo el Botón de Arrepentimiento Argentina?', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></strong>
                 </p>
                 <p style="margin:0 0 12px;">
-                    <?php esc_html_e('¡Nos ayudaría mucho que nos dejes una reseña en WordPress.org! Es gratis y lleva 1 minuto. Tu valoración ayuda a mantener el plugin actualizado.', 'boton-de-arrepentimiento-argentina-woosales'); ?>
+                    <?php esc_html_e('¡Nos ayudaría mucho que nos dejes una reseña en WordPress.org! Es gratis y lleva 1 minuto. Tu valoración ayuda a mantener el plugin actualizado.', 'boton-de-arrepentimiento-argentina-woosales-2'); ?>
                 </p>
                 <p style="margin:0;display:flex;gap:8px;flex-wrap:wrap;">
                     <a href="https://wordpress.org/support/plugin/woosales_arrepentimiento/reviews/#new-post"
                        target="_blank" rel="noopener"
                        class="button button-primary"
                        data-wa-dismiss="done">
-                        <?php esc_html_e('⭐ ¡Dejar una reseña!', 'boton-de-arrepentimiento-argentina-woosales'); ?>
+                        <?php esc_html_e('⭐ ¡Dejar una reseña!', 'boton-de-arrepentimiento-argentina-woosales-2'); ?>
                     </a>
                     <a href="#" class="button" data-wa-dismiss="+30days">
-                        <?php esc_html_e('Recordarme en 30 días', 'boton-de-arrepentimiento-argentina-woosales'); ?>
+                        <?php esc_html_e('Recordarme en 30 días', 'boton-de-arrepentimiento-argentina-woosales-2'); ?>
                     </a>
                     <a href="#" class="wa-dismiss-link" data-wa-dismiss="done">
-                        <?php esc_html_e('Ya dejé mi reseña ✌️', 'boton-de-arrepentimiento-argentina-woosales'); ?>
+                        <?php esc_html_e('Ya dejé mi reseña ✌️', 'boton-de-arrepentimiento-argentina-woosales-2'); ?>
                     </a>
                     <a href="#" class="wa-dismiss-link" data-wa-dismiss="never">
-                        <?php esc_html_e('No mostrar más', 'boton-de-arrepentimiento-argentina-woosales'); ?>
+                        <?php esc_html_e('No mostrar más', 'boton-de-arrepentimiento-argentina-woosales-2'); ?>
                     </a>
                 </p>
             </div>

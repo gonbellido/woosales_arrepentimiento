@@ -37,14 +37,14 @@ class WA_Admin
         foreach ($columns as $key => $value) {
             $nuevas[$key] = $value;
             if ($key === 'title') {
-                $nuevas['wa_codigo'] = __('Código', 'boton-de-arrepentimiento-argentina-woosales');
+                $nuevas['wa_codigo'] = __('Código', 'boton-de-arrepentimiento-argentina-woosales-2');
             }
         }
-        $nuevas['wa_pedido']  = __('Pedido', 'boton-de-arrepentimiento-argentina-woosales');
-        $nuevas['wa_cliente'] = __('Cliente', 'boton-de-arrepentimiento-argentina-woosales');
-        $nuevas['wa_email']   = __('Email', 'boton-de-arrepentimiento-argentina-woosales');
-        $nuevas['wa_estado']  = __('Estado', 'boton-de-arrepentimiento-argentina-woosales');
-        $nuevas['wa_fecha']   = __('Fecha Pedido', 'boton-de-arrepentimiento-argentina-woosales');
+        $nuevas['wa_pedido']  = __('Pedido', 'boton-de-arrepentimiento-argentina-woosales-2');
+        $nuevas['wa_cliente'] = __('Cliente', 'boton-de-arrepentimiento-argentina-woosales-2');
+        $nuevas['wa_email']   = __('Email', 'boton-de-arrepentimiento-argentina-woosales-2');
+        $nuevas['wa_estado']  = __('Estado', 'boton-de-arrepentimiento-argentina-woosales-2');
+        $nuevas['wa_fecha']   = __('Fecha Pedido', 'boton-de-arrepentimiento-argentina-woosales-2');
 
         // Quitar columnas no necesarias
         unset($nuevas['date']);
@@ -113,7 +113,7 @@ class WA_Admin
         $current = sanitize_text_field(wp_unslash($_GET['wa_estado'] ?? '')); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin list filter, no state change.
         ?>
         <select name="wa_estado">
-            <option value=""><?php esc_html_e('Todos los estados', 'boton-de-arrepentimiento-argentina-woosales'); ?></option>
+            <option value=""><?php esc_html_e('Todos los estados', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></option>
             <?php foreach (WA_Status::labels() as $key => $label): ?>
                 <option value="<?php echo esc_attr($key); ?>" <?php selected($current, $key); ?>>
                     <?php echo esc_html($label); ?>
@@ -174,7 +174,7 @@ class WA_Admin
                 '<a href="%s" style="color:%s;">%s → %s</a>',
                 esc_url($url),
                 esc_attr(WA_Status::color($nuevo_estado)),
-                esc_html__('Marcar', 'boton-de-arrepentimiento-argentina-woosales'),
+                esc_html__('Marcar', 'boton-de-arrepentimiento-argentina-woosales-2'),
                 esc_html(WA_Status::label($nuevo_estado))
             );
         }
@@ -192,17 +192,17 @@ class WA_Admin
         $nonce   = sanitize_text_field(wp_unslash($_GET['_wpnonce'] ?? ''));
 
         if (!$post_id || !wp_verify_nonce($nonce, 'wa_quick_status_' . $post_id)) {
-            wp_die(esc_html__('Acción no autorizada.', 'boton-de-arrepentimiento-argentina-woosales'));
+            wp_die(esc_html__('Acción no autorizada.', 'boton-de-arrepentimiento-argentina-woosales-2'));
         }
 
         if (!current_user_can('edit_post', $post_id)) {
-            wp_die(esc_html__('No tenés permisos.', 'boton-de-arrepentimiento-argentina-woosales'));
+            wp_die(esc_html__('No tenés permisos.', 'boton-de-arrepentimiento-argentina-woosales-2'));
         }
 
         $estado_actual = get_post_meta($post_id, '_wa_estado', true) ?: WA_Status::default();
 
         if (!WA_Status::can_transition($estado_actual, $estado) && !current_user_can('manage_options')) {
-            wp_die(esc_html__('Transición de estado no permitida.', 'boton-de-arrepentimiento-argentina-woosales'));
+            wp_die(esc_html__('Transición de estado no permitida.', 'boton-de-arrepentimiento-argentina-woosales-2'));
         }
 
         update_post_meta($post_id, '_wa_estado', $estado);
@@ -214,7 +214,7 @@ class WA_Admin
             'de'    => $estado_actual,
             'a'     => $estado,
             // translators: %s is the user's display name.
-            'nota'  => sprintf(__('Cambio rápido desde listado por %s', 'boton-de-arrepentimiento-argentina-woosales'), wp_get_current_user()->display_name),
+            'nota'  => sprintf(__('Cambio rápido desde listado por %s', 'boton-de-arrepentimiento-argentina-woosales-2'), wp_get_current_user()->display_name),
             'user'  => get_current_user_id(),
         ];
         update_post_meta($post_id, '_wa_log_estados', $log);
@@ -249,7 +249,7 @@ class WA_Admin
             true
         );
         wp_localize_script('wa-admin-js', 'WA_Admin', [
-            'confirm_status' => __('¿Confirmás cambiar el estado?', 'boton-de-arrepentimiento-argentina-woosales'),
+            'confirm_status' => __('¿Confirmás cambiar el estado?', 'boton-de-arrepentimiento-argentina-woosales-2'),
         ]);
     }
 }

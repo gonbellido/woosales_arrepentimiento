@@ -62,12 +62,12 @@ class WA_Form_Handler
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('wa_form_nonce'),
             'text'     => [
-                'success_title'   => __('¡Solicitud Enviada!', 'boton-de-arrepentimiento-argentina-woosales'),
-                'error_generic'   => __('Ocurrió un error. Intentalo de nuevo.', 'boton-de-arrepentimiento-argentina-woosales'),
-                'error_order'     => __('El número de pedido no es válido.', 'boton-de-arrepentimiento-argentina-woosales'),
-                'error_duplicate' => __('Ya existe una reclamación activa para este pedido.', 'boton-de-arrepentimiento-argentina-woosales'),
-                'sending'         => __('Enviando...', 'boton-de-arrepentimiento-argentina-woosales'),
-                'submit_btn'      => __('Enviar Solicitud de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales'),
+                'success_title'   => __('¡Solicitud Enviada!', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'error_generic'   => __('Ocurrió un error. Intentalo de nuevo.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'error_order'     => __('El número de pedido no es válido.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'error_duplicate' => __('Ya existe una reclamación activa para este pedido.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'sending'         => __('Enviando...', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'submit_btn'      => __('Enviar Solicitud de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2'),
             ],
         ]);
     }
@@ -99,7 +99,7 @@ class WA_Form_Handler
         self::$boton_usado = true;
 
         $atts = shortcode_atts([
-            'texto' => __('Botón de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales'),
+            'texto' => __('Botón de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'class' => '',
         ], $atts, 'wa_boton_arrepentimiento');
 
@@ -118,7 +118,7 @@ class WA_Form_Handler
             ?>
             <div class="wa-modal-overlay" id="wa-modal" style="display:none;">
                 <div class="wa-modal-box">
-                    <button type="button" class="wa-modal-close" onclick="WA_Modal.close()" aria-label="<?php esc_attr_e('Cerrar', 'boton-de-arrepentimiento-argentina-woosales'); ?>">&times;</button>
+                    <button type="button" class="wa-modal-close" onclick="WA_Modal.close()" aria-label="<?php esc_attr_e('Cerrar', 'boton-de-arrepentimiento-argentina-woosales-2'); ?>">&times;</button>
                     <div class="wa-modal-body">
                         <?php include WOOSALES_ARG_PLUGIN_DIR . 'templates/form-reclamacion.php'; ?>
                     </div>
@@ -146,7 +146,7 @@ class WA_Form_Handler
             'token'    => $token,
             'question' => sprintf(
                 /* translators: %1$d y %2$d son números */
-                __('¿Cuánto es %1$d + %2$d?', 'boton-de-arrepentimiento-argentina-woosales'),
+                __('¿Cuánto es %1$d + %2$d?', 'boton-de-arrepentimiento-argentina-woosales-2'),
                 $a, $b
             ),
         ];
@@ -226,7 +226,7 @@ class WA_Form_Handler
         if ($dias_transcurridos > 10) {
             $advertencias[] = sprintf(
                 // translators: %d is the number of days since the purchase.
-                __('Han transcurrido %d días desde la compra. El plazo legal de 10 días corridos (Ley 24.240) podría haber vencido.', 'boton-de-arrepentimiento-argentina-woosales'),
+                __('Han transcurrido %d días desde la compra. El plazo legal de 10 días corridos (Ley 24.240) podría haber vencido.', 'boton-de-arrepentimiento-argentina-woosales-2'),
                 $dias_transcurridos
             );
         }
@@ -237,9 +237,9 @@ class WA_Form_Handler
             $reserva_pasada = $reserva < $hoy;
 
             if ($reserva_pasada) {
-                $advertencias[] = __('La fecha de la reserva ya transcurrió. El derecho de arrepentimiento podría no ser aplicable.', 'boton-de-arrepentimiento-argentina-woosales');
+                $advertencias[] = __('La fecha de la reserva ya transcurrió. El derecho de arrepentimiento podría no ser aplicable.', 'boton-de-arrepentimiento-argentina-woosales-2');
             } elseif ($dias_para_reserva < 2) {
-                $advertencias[] = __('Faltan menos de 48 horas hábiles para el inicio del servicio. El derecho de arrepentimiento podría no ser aplicable.', 'boton-de-arrepentimiento-argentina-woosales');
+                $advertencias[] = __('Faltan menos de 48 horas hábiles para el inicio del servicio. El derecho de arrepentimiento podría no ser aplicable.', 'boton-de-arrepentimiento-argentina-woosales-2');
             }
         }
 
@@ -269,7 +269,7 @@ class WA_Form_Handler
 
         if (!self::validar_captcha($captcha_token, $captcha_answer)) {
             wp_send_json_error([
-                'errores' => [__('La verificación es incorrecta. Recargá la página e intentá de nuevo.', 'boton-de-arrepentimiento-argentina-woosales')],
+                'errores' => [__('La verificación es incorrecta. Recargá la página e intentá de nuevo.', 'boton-de-arrepentimiento-argentina-woosales-2')],
             ]);
         }
 
@@ -283,19 +283,19 @@ class WA_Form_Handler
         $errores = [];
 
         if (empty($pedido_id) || !is_numeric($pedido_id)) {
-            $errores[] = __('Ingresá un número de pedido válido.', 'boton-de-arrepentimiento-argentina-woosales');
+            $errores[] = __('Ingresá un número de pedido válido.', 'boton-de-arrepentimiento-argentina-woosales-2');
         }
 
         if (empty($email) || !is_email($email)) {
-            $errores[] = __('Ingresá un email válido.', 'boton-de-arrepentimiento-argentina-woosales');
+            $errores[] = __('Ingresá un email válido.', 'boton-de-arrepentimiento-argentina-woosales-2');
         }
 
         if (empty($nombre)) {
-            $errores[] = __('Ingresá tu nombre.', 'boton-de-arrepentimiento-argentina-woosales');
+            $errores[] = __('Ingresá tu nombre.', 'boton-de-arrepentimiento-argentina-woosales-2');
         }
 
         if (!$acepta_terminos) {
-            $errores[] = __('Debés aceptar los términos y condiciones.', 'boton-de-arrepentimiento-argentina-woosales');
+            $errores[] = __('Debés aceptar los términos y condiciones.', 'boton-de-arrepentimiento-argentina-woosales-2');
         }
 
         if (!empty($errores)) {
@@ -315,7 +315,7 @@ class WA_Form_Handler
         if (!empty($existente)) {
             $codigo_existente = get_post_meta($existente[0], '_wa_codigo_tramite', true);
             wp_send_json_error([
-                'errores' => [__('Ya existe una reclamación activa para este pedido.', 'boton-de-arrepentimiento-argentina-woosales')],
+                'errores' => [__('Ya existe una reclamación activa para este pedido.', 'boton-de-arrepentimiento-argentina-woosales-2')],
                 'codigo_existente' => $codigo_existente,
             ]);
         }
@@ -360,7 +360,7 @@ class WA_Form_Handler
         ]);
 
         if (is_wp_error($post_id)) {
-            wp_send_json_error(['errores' => [__('Error al crear la reclamación.', 'boton-de-arrepentimiento-argentina-woosales')]]);
+            wp_send_json_error(['errores' => [__('Error al crear la reclamación.', 'boton-de-arrepentimiento-argentina-woosales-2')]]);
         }
 
         // Enviar emails

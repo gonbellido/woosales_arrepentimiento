@@ -30,11 +30,11 @@ class WA_Status
     public static function labels(): array
     {
         return [
-            self::PENDIENTE           => __('Pendiente', 'boton-de-arrepentimiento-argentina-woosales'),
-            self::EN_REVISION         => __('En Revisión', 'boton-de-arrepentimiento-argentina-woosales'),
-            self::APROBADA            => __('Aprobada', 'boton-de-arrepentimiento-argentina-woosales'),
-            self::RECHAZADA           => __('Rechazada', 'boton-de-arrepentimiento-argentina-woosales'),
-            self::REINTEGRO_REALIZADO => __('Reintegro Realizado', 'boton-de-arrepentimiento-argentina-woosales'),
+            self::PENDIENTE           => __('Pendiente', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            self::EN_REVISION         => __('En Revisión', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            self::APROBADA            => __('Aprobada', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            self::RECHAZADA           => __('Rechazada', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            self::REINTEGRO_REALIZADO => __('Reintegro Realizado', 'boton-de-arrepentimiento-argentina-woosales-2'),
         ];
     }
 

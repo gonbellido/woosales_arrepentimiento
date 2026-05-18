@@ -45,7 +45,7 @@ function woosales_arg_check_woocommerce(): void
         add_action('admin_notices', function () {
             printf(
                 '<div class="notice notice-error"><p>%s</p></div>',
-                esc_html__('WooSales Arrepentimiento requiere WooCommerce activo.', 'boton-de-arrepentimiento-argentina-woosales')
+                esc_html__('WooSales Arrepentimiento requiere WooCommerce activo.', 'boton-de-arrepentimiento-argentina-woosales-2')
             );
         });
         return;
@@ -77,7 +77,7 @@ function woosales_arg_boton_footer(): void
 
     ?>
     <div class="wa-footer-btn-wrap">
-        <a href="<?php echo esc_url($url); ?>" class="wa-footer-btn" title="<?php esc_attr_e('Ejercer derecho de arrepentimiento — Ley 24.240', 'boton-de-arrepentimiento-argentina-woosales'); ?>">
+        <a href="<?php echo esc_url($url); ?>" class="wa-footer-btn" title="<?php esc_attr_e('Ejercer derecho de arrepentimiento — Ley 24.240', 'boton-de-arrepentimiento-argentina-woosales-2'); ?>">
             ↺ <?php echo esc_html($texto); ?>
         </a>
     </div>
@@ -106,12 +106,12 @@ function woosales_arg_plugin_action_links(array $links): array
         'docs' => sprintf(
             '<a href="%s" target="_blank" rel="noopener" style="font-weight:600;">%s</a>',
             esc_url($landing),
-            esc_html__('📖 Documentación', 'boton-de-arrepentimiento-argentina-woosales')
+            esc_html__('📖 Documentación', 'boton-de-arrepentimiento-argentina-woosales-2')
         ),
         'faq' => sprintf(
             '<a href="%s#faq" target="_blank" rel="noopener">%s</a>',
             esc_url($landing),
-            esc_html__('❓ FAQ', 'boton-de-arrepentimiento-argentina-woosales')
+            esc_html__('❓ FAQ', 'boton-de-arrepentimiento-argentina-woosales-2')
         ),
     ];
 
@@ -133,7 +133,7 @@ function woosales_arg_plugin_row_meta(array $links, string $file): array
     $links[] = sprintf(
         '<a href="%s" target="_blank" rel="noopener">%s</a>',
         esc_url($landing),
-        esc_html__('Ver detalles y documentación', 'boton-de-arrepentimiento-argentina-woosales')
+        esc_html__('Ver detalles y documentación', 'boton-de-arrepentimiento-argentina-woosales-2')
     );
 
     return $links;

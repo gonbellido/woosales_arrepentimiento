@@ -27,7 +27,7 @@ class WA_Email
         $subject = sprintf(
             '[%s] %s — %s',
             $sitio,
-            __('Reclamación de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales'),
+            __('Reclamación de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2'),
             $codigo
         );
 
@@ -53,7 +53,7 @@ class WA_Email
         $subject = sprintf(
             '[%s] %s — Pedido #%s',
             $sitio,
-            __('Nueva Reclamación de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales'),
+            __('Nueva Reclamación de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2'),
             $pedido_id
         );
 
@@ -65,19 +65,19 @@ class WA_Email
             <p><strong>%s:</strong> %s</p>
             <p><strong>%s:</strong> <a href="%s">%s</a></p>
             <p><strong>%s:</strong> %s</p>',
-            esc_html__('Nueva Reclamación Recibida', 'boton-de-arrepentimiento-argentina-woosales'),
-            esc_html__('Nombre', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Nueva Reclamación Recibida', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            esc_html__('Nombre', 'boton-de-arrepentimiento-argentina-woosales-2'),
             esc_html($nombre),
-            esc_html__('Email', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Email', 'boton-de-arrepentimiento-argentina-woosales-2'),
             esc_html($email),
-            esc_html__('Pedido', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Pedido', 'boton-de-arrepentimiento-argentina-woosales-2'),
             esc_html($pedido_id),
-            esc_html__('Código', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Código', 'boton-de-arrepentimiento-argentina-woosales-2'),
             esc_html($codigo),
-            esc_html__('Gestionar', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Gestionar', 'boton-de-arrepentimiento-argentina-woosales-2'),
             esc_url($edit_link),
-            esc_html__('Ver en el panel', 'boton-de-arrepentimiento-argentina-woosales'),
-            esc_html__('Estado', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Ver en el panel', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            esc_html__('Estado', 'boton-de-arrepentimiento-argentina-woosales-2'),
             esc_html(WA_Status::label(WA_Status::default()))
         );
 
@@ -120,27 +120,27 @@ class WA_Email
                     <p>%s — <a href="%s" style="color:#0073aa;">%s</a></p>
                 </div>
             </div>',
-            esc_html__('Reclamación de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales'),
-            esc_html__('Ley 24.240 — Derecho de Revocación', 'boton-de-arrepentimiento-argentina-woosales'),
-            esc_html__('Hola', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Reclamación de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            esc_html__('Ley 24.240 — Derecho de Revocación', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            esc_html__('Hola', 'boton-de-arrepentimiento-argentina-woosales-2'),
             esc_html($nombre),
-            esc_html__('Hemos recibido tu solicitud de arrepentimiento. A continuación encontrarás los datos de tu trámite:', 'boton-de-arrepentimiento-argentina-woosales'),
-            esc_html__('CÓDIGO DE TRÁMITE', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Hemos recibido tu solicitud de arrepentimiento. A continuación encontrarás los datos de tu trámite:', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            esc_html__('CÓDIGO DE TRÁMITE', 'boton-de-arrepentimiento-argentina-woosales-2'),
             esc_html($codigo),
-            esc_html__('Estado actual', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Estado actual', 'boton-de-arrepentimiento-argentina-woosales-2'),
             esc_html($estado),
-            esc_html__('Recibirás una notificación por correo cuando el estado de tu reclamación cambie.', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Recibirás una notificación por correo cuando el estado de tu reclamación cambie.', 'boton-de-arrepentimiento-argentina-woosales-2'),
             $enlace_seguimiento ? sprintf(
                 '<p style="text-align:center;"><a href="%s" style="display:inline-block;background:#0073aa;color:#fff;padding:12px 24px;text-decoration:none;border-radius:4px;font-weight:bold;">%s</a></p>',
                 esc_url($enlace_seguimiento),
-                esc_html__('Consultar Estado de mi Reclamación', 'boton-de-arrepentimiento-argentina-woosales')
+                esc_html__('Consultar Estado de mi Reclamación', 'boton-de-arrepentimiento-argentina-woosales-2')
             ) : '',
-            esc_html__('Si tenés alguna consulta, no dudes en contactarnos.', 'boton-de-arrepentimiento-argentina-woosales'),
-            esc_html__('Atentamente,', 'boton-de-arrepentimiento-argentina-woosales'),
+            esc_html__('Si tenés alguna consulta, no dudes en contactarnos.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+            esc_html__('Atentamente,', 'boton-de-arrepentimiento-argentina-woosales-2'),
             esc_html($sitio),
             esc_html($sitio),
             esc_url(home_url()),
-            esc_html__('Visitar sitio', 'boton-de-arrepentimiento-argentina-woosales')
+            esc_html__('Visitar sitio', 'boton-de-arrepentimiento-argentina-woosales-2')
         );
     }
 }

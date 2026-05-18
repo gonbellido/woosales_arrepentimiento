@@ -37,7 +37,7 @@ class WA_Tracking
         if (!empty($codigo)) {
             $resultado = $this->buscar_reclamacion($codigo);
             if (!$resultado) {
-                $error = __('No se encontró ninguna reclamación con ese código de trámite.', 'boton-de-arrepentimiento-argentina-woosales');
+                $error = __('No se encontró ninguna reclamación con ese código de trámite.', 'boton-de-arrepentimiento-argentina-woosales-2');
             }
         }
 

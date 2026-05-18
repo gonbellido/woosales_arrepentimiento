@@ -49,7 +49,7 @@ class WA_Elementor_Widget_Button extends \Elementor\Widget_Base
 
     public function get_title(): string
     {
-        return __('Botón Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales');
+        return __('Botón Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2');
     }
 
     public function get_icon(): string
@@ -70,32 +70,32 @@ class WA_Elementor_Widget_Button extends \Elementor\Widget_Base
     protected function register_controls(): void
     {
         $this->start_controls_section('content_section', [
-            'label' => __('Contenido', 'boton-de-arrepentimiento-argentina-woosales'),
+            'label' => __('Contenido', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
         ]);
 
         $this->add_control('button_text', [
-            'label'   => __('Texto del botón', 'boton-de-arrepentimiento-argentina-woosales'),
+            'label'   => __('Texto del botón', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'type'    => \Elementor\Controls_Manager::TEXT,
-            'default' => __('Botón de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales'),
+            'default' => __('Botón de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2'),
         ]);
 
         $this->end_controls_section();
 
         $this->start_controls_section('style_section', [
-            'label' => __('Estilo', 'boton-de-arrepentimiento-argentina-woosales'),
+            'label' => __('Estilo', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
         ]);
 
         $this->add_control('button_bg_color', [
-            'label'     => __('Color de fondo', 'boton-de-arrepentimiento-argentina-woosales'),
+            'label'     => __('Color de fondo', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'type'      => \Elementor\Controls_Manager::COLOR,
             'default'   => '#d32f2f',
             'selectors' => ['{{WRAPPER}} .wa-popup-trigger' => 'background-color: {{VALUE}};'],
         ]);
 
         $this->add_control('button_text_color', [
-            'label'     => __('Color de texto', 'boton-de-arrepentimiento-argentina-woosales'),
+            'label'     => __('Color de texto', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'type'      => \Elementor\Controls_Manager::COLOR,
             'default'   => '#ffffff',
             'selectors' => ['{{WRAPPER}} .wa-popup-trigger' => 'color: {{VALUE}};'],
@@ -112,14 +112,14 @@ class WA_Elementor_Widget_Button extends \Elementor\Widget_Base
         ]);
 
         $this->add_control('button_border_radius', [
-            'label'      => __('Radio de borde', 'boton-de-arrepentimiento-argentina-woosales'),
+            'label'      => __('Radio de borde', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'type'       => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%'],
             'selectors'  => ['{{WRAPPER}} .wa-popup-trigger' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'],
         ]);
 
         $this->add_responsive_control('button_padding', [
-            'label'      => __('Padding', 'boton-de-arrepentimiento-argentina-woosales'),
+            'label'      => __('Padding', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'type'       => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', 'em'],
             'selectors'  => ['{{WRAPPER}} .wa-popup-trigger' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'],
@@ -131,7 +131,7 @@ class WA_Elementor_Widget_Button extends \Elementor\Widget_Base
     protected function render(): void
     {
         $settings = $this->get_settings_for_display();
-        $texto    = !empty($settings['button_text']) ? $settings['button_text'] : __('Botón de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales');
+        $texto    = !empty($settings['button_text']) ? $settings['button_text'] : __('Botón de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2');
 
         wp_enqueue_style('wa-form-css', WOOSALES_ARG_PLUGIN_URL . 'assets/css/wa-form.css', [], WOOSALES_ARG_VERSION);
         wp_enqueue_script('wa-form-js', WOOSALES_ARG_PLUGIN_URL . 'assets/js/wa-form.js', ['jquery'], WOOSALES_ARG_VERSION, true);
@@ -139,12 +139,12 @@ class WA_Elementor_Widget_Button extends \Elementor\Widget_Base
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('wa_form_nonce'),
             'text'     => [
-                'success_title'   => __('¡Solicitud Enviada!', 'boton-de-arrepentimiento-argentina-woosales'),
-                'error_generic'   => __('Ocurrió un error. Intentalo de nuevo.', 'boton-de-arrepentimiento-argentina-woosales'),
-                'error_order'     => __('El número de pedido no es válido.', 'boton-de-arrepentimiento-argentina-woosales'),
-                'error_duplicate' => __('Ya existe una reclamación activa para este pedido.', 'boton-de-arrepentimiento-argentina-woosales'),
-                'sending'         => __('Enviando...', 'boton-de-arrepentimiento-argentina-woosales'),
-                'submit_btn'      => __('Enviar Solicitud de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales'),
+                'success_title'   => __('¡Solicitud Enviada!', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'error_generic'   => __('Ocurrió un error. Intentalo de nuevo.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'error_order'     => __('El número de pedido no es válido.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'error_duplicate' => __('Ya existe una reclamación activa para este pedido.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'sending'         => __('Enviando...', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'submit_btn'      => __('Enviar Solicitud de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2'),
             ],
         ]);
 
@@ -160,7 +160,7 @@ class WA_Elementor_Widget_Button extends \Elementor\Widget_Base
             ?>
             <div class="wa-modal-overlay" id="wa-modal" style="display:none;">
                 <div class="wa-modal-box">
-                    <button type="button" class="wa-modal-close" onclick="WA_Modal.close()" aria-label="<?php esc_attr_e('Cerrar', 'boton-de-arrepentimiento-argentina-woosales'); ?>">&times;</button>
+                    <button type="button" class="wa-modal-close" onclick="WA_Modal.close()" aria-label="<?php esc_attr_e('Cerrar', 'boton-de-arrepentimiento-argentina-woosales-2'); ?>">&times;</button>
                     <div class="wa-modal-body">
                         <?php include WOOSALES_ARG_PLUGIN_DIR . 'templates/form-reclamacion.php'; ?>
                     </div>
@@ -190,7 +190,7 @@ class WA_Elementor_Widget_Form extends \Elementor\Widget_Base
 
     public function get_title(): string
     {
-        return __('Formulario Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales');
+        return __('Formulario Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2');
     }
 
     public function get_icon(): string
@@ -211,13 +211,13 @@ class WA_Elementor_Widget_Form extends \Elementor\Widget_Base
     protected function register_controls(): void
     {
         $this->start_controls_section('content_section', [
-            'label' => __('Información', 'boton-de-arrepentimiento-argentina-woosales'),
+            'label' => __('Información', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
         ]);
 
         $this->add_control('info_notice', [
             'type'            => \Elementor\Controls_Manager::RAW_HTML,
-            'raw'             => __('<strong>Formulario de Arrepentimiento (Ley 24.240)</strong><br>Muestra el formulario completo con aviso legal. No requiere configuración adicional.', 'boton-de-arrepentimiento-argentina-woosales'),
+            'raw'             => __('<strong>Formulario de Arrepentimiento (Ley 24.240)</strong><br>Muestra el formulario completo con aviso legal. No requiere configuración adicional.', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
         ]);
 
@@ -232,12 +232,12 @@ class WA_Elementor_Widget_Form extends \Elementor\Widget_Base
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('wa_form_nonce'),
             'text'     => [
-                'success_title'   => __('¡Solicitud Enviada!', 'boton-de-arrepentimiento-argentina-woosales'),
-                'error_generic'   => __('Ocurrió un error. Intentalo de nuevo.', 'boton-de-arrepentimiento-argentina-woosales'),
-                'error_order'     => __('El número de pedido no es válido.', 'boton-de-arrepentimiento-argentina-woosales'),
-                'error_duplicate' => __('Ya existe una reclamación activa para este pedido.', 'boton-de-arrepentimiento-argentina-woosales'),
-                'sending'         => __('Enviando...', 'boton-de-arrepentimiento-argentina-woosales'),
-                'submit_btn'      => __('Enviar Solicitud de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales'),
+                'success_title'   => __('¡Solicitud Enviada!', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'error_generic'   => __('Ocurrió un error. Intentalo de nuevo.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'error_order'     => __('El número de pedido no es válido.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'error_duplicate' => __('Ya existe una reclamación activa para este pedido.', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'sending'         => __('Enviando...', 'boton-de-arrepentimiento-argentina-woosales-2'),
+                'submit_btn'      => __('Enviar Solicitud de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2'),
             ],
         ]);
 
@@ -250,8 +250,8 @@ class WA_Elementor_Widget_Form extends \Elementor\Widget_Base
     {
         ?>
         <div style="background:#f0f0f0;padding:20px;text-align:center;color:#555;border:2px dashed #ccc;border-radius:6px;">
-            <strong><?php esc_html_e('Formulario de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales'); ?></strong><br>
-            <small><?php esc_html_e('(se muestra en el frontend)', 'boton-de-arrepentimiento-argentina-woosales'); ?></small>
+            <strong><?php esc_html_e('Formulario de Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></strong><br>
+            <small><?php esc_html_e('(se muestra en el frontend)', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></small>
         </div>
         <?php
     }
@@ -269,7 +269,7 @@ class WA_Elementor_Widget_Tracking extends \Elementor\Widget_Base
 
     public function get_title(): string
     {
-        return __('Seguimiento Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales');
+        return __('Seguimiento Arrepentimiento', 'boton-de-arrepentimiento-argentina-woosales-2');
     }
 
     public function get_icon(): string
@@ -290,13 +290,13 @@ class WA_Elementor_Widget_Tracking extends \Elementor\Widget_Base
     protected function register_controls(): void
     {
         $this->start_controls_section('content_section', [
-            'label' => __('Información', 'boton-de-arrepentimiento-argentina-woosales'),
+            'label' => __('Información', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
         ]);
 
         $this->add_control('info_notice', [
             'type'            => \Elementor\Controls_Manager::RAW_HTML,
-            'raw'             => __('<strong>Seguimiento de Reclamación</strong><br>El cliente ingresa su código de trámite y consulta el estado. No requiere configuración adicional.', 'boton-de-arrepentimiento-argentina-woosales'),
+            'raw'             => __('<strong>Seguimiento de Reclamación</strong><br>El cliente ingresa su código de trámite y consulta el estado. No requiere configuración adicional.', 'boton-de-arrepentimiento-argentina-woosales-2'),
             'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
         ]);
 
@@ -321,7 +321,7 @@ class WA_Elementor_Widget_Tracking extends \Elementor\Widget_Base
             ]);
 
             if (empty($posts)) {
-                $error = __('No se encontró ninguna reclamación con ese código de trámite.', 'boton-de-arrepentimiento-argentina-woosales');
+                $error = __('No se encontró ninguna reclamación con ese código de trámite.', 'boton-de-arrepentimiento-argentina-woosales-2');
             } else {
                 $post   = $posts[0];
                 $estado = get_post_meta($post->ID, '_wa_estado', true) ?: WA_Status::default();
@@ -345,8 +345,8 @@ class WA_Elementor_Widget_Tracking extends \Elementor\Widget_Base
     {
         ?>
         <div style="background:#f0f0f0;padding:20px;text-align:center;color:#555;border:2px dashed #ccc;border-radius:6px;">
-            <strong><?php esc_html_e('Seguimiento de Reclamación', 'boton-de-arrepentimiento-argentina-woosales'); ?></strong><br>
-            <small><?php esc_html_e('(el cliente ingresa su código de trámite)', 'boton-de-arrepentimiento-argentina-woosales'); ?></small>
+            <strong><?php esc_html_e('Seguimiento de Reclamación', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></strong><br>
+            <small><?php esc_html_e('(el cliente ingresa su código de trámite)', 'boton-de-arrepentimiento-argentina-woosales-2'); ?></small>
         </div>
         <?php
     }
