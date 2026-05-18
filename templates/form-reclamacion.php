@@ -20,6 +20,12 @@ if (!defined('ABSPATH')) {
     </div>
 
     <form class="wa-form" novalidate>
+        <!-- Honeypot: oculto via CSS, no lo ve el usuario, bots lo llenan -->
+        <div class="wa-hp-field" aria-hidden="true">
+            <label for="wa_website"><?php esc_html_e('Sitio web', 'woosales-arrepentimiento'); ?></label>
+            <input type="text" name="wa_website" id="wa_website" tabindex="-1" autocomplete="off" value="">
+        </div>
+
         <div class="wa-form-field">
             <label for="" class="wa-label-pedido"><?php esc_html_e('Número de Pedido / Reserva *', 'woosales-arrepentimiento'); ?></label>
             <input type="text" class="wa-input-pedido" name="pedido_id" required
@@ -46,6 +52,18 @@ if (!defined('ABSPATH')) {
             <label for="" class="wa-label-fecha"><?php esc_html_e('Fecha de la Reserva (opcional)', 'woosales-arrepentimiento'); ?></label>
             <input type="date" class="wa-input-fecha" name="fecha_reserva">
             <span class="wa-field-hint"><?php esc_html_e('Ayuda a validar si tu solicitud está dentro del plazo legal.', 'woosales-arrepentimiento'); ?></span>
+        </div>
+
+        <?php
+        $wa_captcha_data = isset($wa_captcha) ? $wa_captcha : \WoosalesArrepentimiento\WA_Form_Handler::generar_captcha();
+        ?>
+        <div class="wa-form-field wa-captcha-field">
+            <label><?php echo esc_html($wa_captcha_data['question']); ?> *</label>
+            <input type="text" class="wa-input-captcha" name="captcha_answer" required
+                   inputmode="numeric" pattern="[0-9]*" autocomplete="off"
+                   placeholder="<?php esc_attr_e('Tu respuesta', 'woosales-arrepentimiento'); ?>">
+            <input type="hidden" class="wa-input-captcha-token" name="captcha_token"
+                   value="<?php echo esc_attr($wa_captcha_data['token']); ?>">
         </div>
 
         <div class="wa-form-field wa-checkbox-field">

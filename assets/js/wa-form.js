@@ -28,6 +28,9 @@
             email:           $form.find('.wa-input-email').val().trim(),
             fecha_reserva:   $form.find('.wa-input-fecha').val(),
             acepta_terminos: $form.find('.wa-input-terminos').is(':checked') ? 1 : 0,
+            captcha_answer:  $form.find('.wa-input-captcha').val().trim(),
+            captcha_token:   $form.find('.wa-input-captcha-token').val(),
+            wa_website:      $form.find('#wa_website').val(),
         };
 
         $.post(WA_Form.ajax_url, data, function (response) {

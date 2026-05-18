@@ -156,6 +156,7 @@ class WA_Elementor_Widget_Button extends \Elementor\Widget_Base
         if (!self::$modal_rendered) {
             self::$modal_rendered = true;
             $wa_texto_legal = WA_Settings::get_legal_text();
+            $wa_captcha     = WA_Form_Handler::generar_captcha();
             ?>
             <div class="wa-modal-overlay" id="wa-modal" style="display:none;">
                 <div class="wa-modal-box">
@@ -241,6 +242,7 @@ class WA_Elementor_Widget_Form extends \Elementor\Widget_Base
         ]);
 
         $wa_texto_legal = WA_Settings::get_legal_text();
+        $wa_captcha     = WA_Form_Handler::generar_captcha();
         include WA_PLUGIN_DIR . 'templates/form-reclamacion.php';
     }
 

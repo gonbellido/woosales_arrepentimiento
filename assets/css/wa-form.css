@@ -329,6 +329,22 @@
     margin-top: 2px;
 }
 
+/* Honeypot — invisible para humanos */
+.wa-hp-field {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Captcha */
+.wa-captcha-field input[type="text"] {
+    max-width: 160px;
+}
+
 /* Popup trigger button */
 .wa-popup-trigger {
     display: inline-block;

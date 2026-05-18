@@ -79,6 +79,7 @@ class WA_Form_Handler
     {
         $this->do_enqueue_assets();
         $wa_texto_legal = WA_Settings::get_legal_text();
+        $wa_captcha     = self::generar_captcha();
         ob_start();
         include WA_PLUGIN_DIR . 'templates/form-reclamacion.php';
         return ob_get_clean();
@@ -112,6 +113,7 @@ class WA_Form_Handler
         $modal = '';
         if ($es_primera_vez) {
             $wa_texto_legal = WA_Settings::get_legal_text();
+            $wa_captcha     = self::generar_captcha();
             ob_start();
             ?>
             <div class="wa-modal-overlay" id="wa-modal" style="display:none;">
@@ -127,6 +129,42 @@ class WA_Form_Handler
         }
 
         return $boton . $modal;
+    }
+
+    /**
+     * Genera pregunta CAPTCHA y guarda respuesta en transient (single-use, 2h).
+     */
+    public static function generar_captcha(): array
+    {
+        $a      = wp_rand(1, 9);
+        $b      = wp_rand(1, 9);
+        $token  = wp_generate_password(20, false);
+
+        set_transient('wa_captcha_' . $token, $a + $b, 2 * HOUR_IN_SECONDS);
+
+        return [
+            'token'    => $token,
+            'question' => sprintf(
+                /* translators: %1$d y %2$d son números */
+                __('¿Cuánto es %1$d + %2$d?', 'woosales-arrepentimiento'),
+                $a, $b
+            ),
+        ];
+    }
+
+    /**
+     * Valida respuesta CAPTCHA. Borra el transient (single-use).
+     */
+    private static function validar_captcha(string $token, string $respuesta): bool
+    {
+        if (empty($token) || !is_numeric($respuesta)) {
+            return false;
+        }
+
+        $esperado = get_transient('wa_captcha_' . $token);
+        delete_transient('wa_captcha_' . $token);
+
+        return $esperado !== false && (int) $respuesta === (int) $esperado;
     }
 
     /**
@@ -213,6 +251,26 @@ class WA_Form_Handler
     public function handle_submission(): void
     {
         check_ajax_referer('wa_form_nonce', 'nonce');
+
+        // Honeypot: bots llenan campos ocultos — fake success silencioso
+        if (!empty($_POST['wa_website'])) {
+            wp_send_json_success([
+                'codigo'             => str_pad((string) wp_rand(100, 999), 3, '0') . '-0000-' . current_time('Ymd'),
+                'estado'             => WA_Status::label(WA_Status::default()),
+                'advertencias'       => [],
+                'enlace_seguimiento' => '',
+            ]);
+        }
+
+        // CAPTCHA
+        $captcha_token  = sanitize_text_field(wp_unslash($_POST['captcha_token'] ?? ''));
+        $captcha_answer = sanitize_text_field(wp_unslash($_POST['captcha_answer'] ?? ''));
+
+        if (!self::validar_captcha($captcha_token, $captcha_answer)) {
+            wp_send_json_error([
+                'errores' => [__('La verificación es incorrecta. Recargá la página e intentá de nuevo.', 'woosales-arrepentimiento')],
+            ]);
+        }
 
         $pedido_id      = sanitize_text_field(wp_unslash($_POST['pedido_id'] ?? ''));
         $email          = sanitize_email(wp_unslash($_POST['email'] ?? ''));
